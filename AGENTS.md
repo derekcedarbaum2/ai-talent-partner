@@ -8,7 +8,25 @@ user the same questions inline and wait for answers.
 ## Orientation
 Read `README.md` first, then `config/config.example.json` and the `config/*.example.md` files. The user's
 real config lives in `config/config.json`, `config/companies.txt`, `config/terms.md`, `config/profile.md`,
-and `config/accomplishment-bank.md`. Those are gitignored and personal; the `.example` versions are the schema.
+and your about-me.md (the accomplishment bank in your workspace; path = config key accomplishment_bank). Those are gitignored and personal; the `.example` versions are the schema.
+
+## The workspace (create this during setup)
+This repo is code. The user's personal data lives in a separate workspace folder they choose. During
+setup you MUST ask where they want it (default `~/job-search`), set `workspace_root` in config.json,
+and scaffold this structure (full details in `docs/WORKSPACE.md`):
+
+```
+<workspace_root>/
+  about-me.md          the accomplishment bank: every accomplishment, tagged, source of truth for all materials
+  profile.md           who they are and what they want
+  master-resume.html   base resume, styled from templates/resume.html, filled from about-me.md
+  jobs.csv             the tracker sheet (CSV backend only)
+  applications/<Company> - <Role>/   jd.md, resume.md, cover-letter.md, application-questions.md
+```
+
+Point the config keys `accomplishment_bank`, `profile_file`, `applications_dir`, and `csv_path` inside
+this folder. Never write the user's personal data into the repo. Starter company lists are in
+`config/seed-companies/` (defense, robotics, ai); offer them and note the user can add any industry.
 
 ## First-time setup
 Follow `skills/setup/SKILL.md` end to end. It tells you what to ask, what files to write, how to create the
@@ -42,7 +60,7 @@ Tell the user: the finder fills the sheet; they type "Yes" in the "Will I apply?
 the generator writes materials for those. It only generates once per job. This is the core workflow.
 
 ## Sheet I/O
-`scripts/sheet_io.py` abstracts the backend. With `backend: csv` it reads/writes `data/jobs.csv`. With
+`scripts/sheet_io.py` abstracts the backend. With `backend: csv` it reads/writes the workspace `jobs.csv` (config `csv_path`). With
 `backend: google_sheets` it uses the Google Sheets API (see `docs/SETUP.md` for the one-time auth). Use it for
 all reads/writes/appends/deletes so the rest of the code does not care which backend is active.
 

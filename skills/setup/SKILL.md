@@ -15,8 +15,15 @@ If you are in Codex or another agent without that tool, ask the same questions i
 at a time, and wait for answers.
 
 ## Step 0 : Orient
-Read `README.md`, `config/config.example.json`, and the three `config/*.example.md` files so you
-know the schema you are filling. Confirm `python3` and (for Claude Code) the `claude` CLI exist.
+Read `README.md`, `config/config.example.json`, `docs/WORKSPACE.md`, and the three `config/*.example.md`
+files so you know the schema you are filling. Confirm `python3` and (for Claude Code) the `claude` CLI exist.
+
+## Step 0.5 : Choose and scaffold the workspace
+Ask the user where they want their personal job-search folder to live (default `~/job-search`). This is
+separate from the repo: it holds their data, not the code. Create the structure from `docs/WORKSPACE.md`:
+`about-me.md`, `profile.md`, an `applications/` folder, and `jobs.csv` if they pick the CSV backend.
+Set `workspace_root` in `config/config.json` and point `accomplishment_bank` (to `about-me.md`),
+`profile_file`, `applications_dir`, and `csv_path` inside it. Never write personal data into the repo.
 
 ## Step 1 : Interview the user, gathering raw material first
 Ask for source material up front, because everything downstream is better when seeded from real
@@ -43,8 +50,8 @@ Write these into `config/` (the real files, not the `.example` ones):
 
 - `config/profile.md`, from `config/profile.example.md`, filled from the interview.
 - `config/terms.md`: the title list, exclusions, and the hard filters they chose (location, experience ceiling, salary floor, company special-cases). Mirror the format in `config/terms.example.md`.
-- `config/companies.txt`: research and generate the list. Use web search to find companies in their target industries and geographies, prioritizing actively-hiring firms. For each, prefer the `ats:provider:token` form by checking for a Greenhouse/Lever/Ashby board; fall back to the homepage URL. Aim for a real starter set (50 to a few hundred). Tell the user the count and that they can edit the file anytime.
-- `config/accomplishment-bank.md`: hand off to the accomplishment-interview skill in Step 4. Do not build it inline.
+- `config/companies.txt`: build the list. Starter lists ship in `config/seed-companies/` (defense, robotics, ai). If the user's target industries overlap those, offer to seed from them; tell the user these exist and that they can add any industry they see fit. For industries not covered, use web search to find companies in their target industries and geographies, prioritizing actively-hiring firms. For each company, prefer the `ats:provider:token` form by checking for a Greenhouse/Lever/Ashby board; fall back to the homepage URL. Aim for a real starter set (50 to a few hundred). Tell the user the count and that they can edit the file anytime.
+- `about-me.md` (the accomplishment bank, in the workspace): hand off to the accomplishment-interview skill in Step 4. Do not build it inline.
 - `config/config.json`, from `config/config.example.json`, with backend, paths, schedules, and applications_dir set.
 
 ## Step 3 : Set up the spreadsheet
@@ -54,7 +61,7 @@ The tracker writes one row per found job with these columns, A to H:
 
 Column H ("Will I apply?") is the control. The user marks Yes and the generator builds their materials.
 
-- CSV/Excel backend: create `data/jobs.csv` with that header row. Done.
+- CSV/Excel backend: create `jobs.csv` in the workspace (the `csv_path` you set) with that header row. Done.
 - Google Sheets backend: create a new sheet (or use one they provide), set the header row, and put its ID in `config.json`. This needs Google auth once. In Claude Code, use a connected Google Drive/Sheets MCP if present, otherwise walk them through creating a sheet, pasting the ID, and the one-time OAuth that `scripts/sheet_io.py` uses. See `docs/SETUP.md`.
 
 ## Step 4 : Build the accomplishment bank

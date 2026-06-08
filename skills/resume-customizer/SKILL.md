@@ -9,7 +9,7 @@ Tailor the resume to one job. Tailoring means selecting, reweighting, and truthf
 
 ## Operating principles
 
-- Source of truth is the bank: `config/accomplishment-bank.md`. Every bullet on the tailored resume traces to a bank entry. If a tailored bullet has no bank source, it is fabrication. Cut it, or ask the user to add the fact to the bank first.
+- Source of truth is the bank: your about-me.md (the accomplishment bank in your workspace; path = config key accomplishment_bank). Every bullet on the tailored resume traces to a bank entry. If a tailored bullet has no bank source, it is fabrication. Cut it, or ask the user to add the fact to the bank first.
 - Moderate tailoring: reorder and reweight bullets, align keywords to the JD, and truthfully rephrase bullets and the summary to mirror JD language. The headline matches the exact job title. Do not heavily rewrite into claims the bank does not support, and do not leave the resume untouched.
 - Fixed facts never change: companies, dates, titles held, education, clearance, contact. Tailoring touches emphasis, ordering, summary, skills, and bullet phrasing, not history.
 - Voice and hard gates live in `references/resume-writing-rules.md`. No em-dashes. No fabricated metrics. Quantified outcomes over responsibilities.
@@ -23,7 +23,7 @@ The orchestrator does selection and tailoring because it holds the bank plus the
 
 ### Step 0 : Load
 1. Job title and job description. Standing intake: read `applications/<Company> - <Role>/jd.md`. If the user names an existing application folder, use its `jd.md`. If they paste text or give a URL, scaffold the folder and save `jd.md` first, then proceed. Outputs are written back into this same packet folder, which is shared with `/cover-letter` so one JD drives both.
-2. Accomplishment bank: `config/accomplishment-bank.md`.
+2. Accomplishment bank: your about-me.md (the accomplishment bank in your workspace; path = config key accomplishment_bank).
 3. Base resume template: `templates/resume.html`. The HTML is the render source. Preserve its structure and styling; you are filling it, not redesigning it.
 4. Personas: see Step 4. Use whatever reader-persona reference your harness provides, or assemble the default panel below from the JD itself.
 5. Rules: `references/ats-rules.md`, `references/resume-writing-rules.md`.

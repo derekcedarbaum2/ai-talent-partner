@@ -5,7 +5,7 @@ description: Builds or enriches the user's accomplishment bank, the single sourc
 
 # Accomplishment Interview
 
-You build `config/accomplishment-bank.md`: the canonical, tagged list of the user's accomplishments
+You build your about-me.md (the accomplishment bank in your workspace; path = config key accomplishment_bank): the canonical, tagged list of the user's accomplishments
 that the resume and cover-letter skills select from per job. Quality here sets the ceiling on every
 downstream artifact. The core principle: seed from real material first, interrogate for gaps second.
 Never interview from a blank page, and never invent.
@@ -44,7 +44,7 @@ need it. And ask about breadth beyond the obvious one or two roles (side project
 earlier career) if those matter for the user's target roles.
 
 ## Step 4 : Write the bank
-Write `config/accomplishment-bank.md`. Open with the rules: this is a superset (more than fits on one page,
+Write your about-me.md (the accomplishment bank in your workspace; path = config key accomplishment_bank). Open with the rules: this is a superset (more than fits on one page,
 tailoring means selecting and reweighting, never inventing); every entry carries the real contribution and a
 number where one exists; mark estimates as estimates; keep sensitive material vague. Group entries by theme
 (for example a "spine" theme for the user's strongest throughline, then GTM, leadership, technical, AI, and so on).

@@ -1,0 +1,209 @@
+# Seed company list: Artificial intelligence
+# Optional starter list. Append the ones you care about into your config/companies.txt,
+# or point the setup skill at this file. Public company names; edit freely.
+
+Anam | https://anam.ai
+Strella | https://strellabiotech.com
+7AI | https://7ai.com
+Aurascape | https://aurascape.ai
+depthfirst | https://depthfirst.ai
+Lumana | https://lumana.ai
+Prophet Security | https://prophetsecurity.ai
+Simbian | https://simbian.ai
+Alex | https://alex.io
+Tako | https://tako.com
+Bluefish | https://bluefish.ai
+Creatify AI | https://creatify.ai
+Newton Research | https://newtonresearch.ai
+Profound | https://tryprofound.com
+MainFunc | https://mainfunc.ai
+Narada | https://narada.ai
+Pokee AI | https://pokee.ai
+Serval | https://serval.com
+Actively AI | https://activelyai.com
+Netic | https://netic.ai
+Reevo | https://reevo.ai
+Antithesis | https://antithesis.com
+PlayerZero | https://playerzero.ai
+Resolve AI | https://resolve.ai
+Superblocks | https://superblocks.com
+Alta | https://altahq.com
+Oboe | https://oboe.com
+Raspberry AI | https://raspberryai.com
+AgentSmyth | https://agentsmyth.ai
+Avantos | https://avantos.ai
+Bretton AI | https://bretton.ai
+Further AI | https://furtherai.com
+Light | https://light.inc
+Questflow | https://questflow.ai
+Salient | https://salient.com
+TidalWave | https://tidalwave.com
+Assort Health | https://assorthealth.com
+Boltz | https://boltz.bio
+Chai Discovery | https://chaidiscovery.com
+Elicit | https://elicit.com
+Ellipsis Health | https://ellipsishealth.com
+Layer Health | https://layerhealth.com
+Penguin AI | https://penguinai.com
+Periodic Labs | https://periodic.com
+Qualified Health | https://qualifiedhealthai.com
+Atomic Canyon | https://atomiccanyon.com
+CuspAI | https://cusp.ai
+Leo AI | https://getleo.ai
+Procure AI | https://procure.ai
+Qbiq | https://qbiq.ai
+Ankar | https://ankar.ai
+DeepJudge | https://deepjudge.ai
+Enter | https://enter.health
+Rhino Federated Computing | https://rhinofcp.com
+Aaru | https://aaru.com
+LanceDB | https://lancedb.com
+AMESA | https://amesa.ai
+Applied Compute | https://appliedcompute.ai
+E2B | https://e2b.dev
+Linkup | https://linkup.so
+Lyzr | https://lyzr.ai
+Maisa AI | https://maisa.ai
+Parallel | https://parallel.ai
+Seekr | https://seekr.com
+StackOne | https://stackone.com
+Thread AI | https://thread.ai
+Browser Use | https://browser-use.com
+LlamaIndex | https://llamaindex.ai
+FriendliAI | https://friendli.ai
+Ami Labs | https://amilabs.xyz
+Black Forest Labs | https://bfl.ai
+Moonlake AI | https://moonlake.ai
+Moonvalley | https://moonvalley.com
+Paid | https://paid.ai
+ChipAgents | https://chipagents.ai
+SiPearl | https://sipearl.com
+Unconventional AI | https://unconventional.ai
+Majestic Labs | https://majestic-labs.ai
+Positron | https://positron.ai
+Dash0 | https://dash0.com
+Geordie AI | https://geordie.ai
+InCountry | https://incountry.com
+Knostic | https://knostic.ai
+Thinking Machines Lab | https://thinkingmachines.ai
+LMArena | https://lmarena.ai
+Keycard | https://keycard.ai
+Straiker | https://straiker.ai
+Virtue AI | https://virtueai.com
+Augmentus | https://augmentus.tech
+FieldAI | https://fieldai.com
+Generalist AI | https://generalist.ai
+InOrbit AI | https://inorbit.ai
+BOS Semiconductors | https://bos-semi.com
+DYNA | https://dyna.co
+Gravis Robotics | https://gravisrobotics.com
+The Bot Company | https://bot.co
+Anthropic | https://www.anthropic.com
+Perplexity | https://www.perplexity.ai
+xAI | https://x.ai
+Replit | https://replit.com
+Nscale | https://www.nscale.com
+Mistral AI | https://mistral.ai
+ElevenLabs | https://elevenlabs.io
+Lovable | https://lovable.dev
+Glean | https://www.glean.com
+EliseAI | https://www.eliseai.com
+Anysphere | https://anysphere.inc
+Cognition | https://www.cognition.ai
+Lav Labs | https://lavlabs.com
+Inspiren | https://inspiren.com
+Harvey | https://harvey.ai
+Spring Health | https://www.springhealth.com
+You.com | https://you.com
+MarqVision | https://www.marqvision.com
+Mercor | https://mercor.com
+Character.ai | https://character.ai
+Vectara | https://vectara.com
+CodeRabbit | https://coderabbit.ai
+OpenEvidence | https://www.openevidence.com
+WorkFusion | https://www.workfusion.com
+Paradox | https://www.paradox.ai
+Suno | https://www.suno.com
+Factory | https://www.factory.ai
+DeepL | https://www.deepl.com
+AppZen | https://www.appzen.com
+6sense | https://www.6sense.com
+n8n | https://n8n.io
+Clay | https://clay.com
+Phia | https://phia.com
+AI Creator | https://www.aicreator.co
+Sierra | https://sierra.ai
+Liquid AI | https://liquid.ai
+Runway | https://runwayml.com
+DRUID AI | https://www.druidai.com
+Apollo.io | https://www.apollo.io
+VAST Data | https://www.vastdata.com
+Exa | https://exa.ai
+Rebellions | https://rebellions.ai
+Lila Sciences | https://www.lila.ai
+Valence | https://www.valence.co
+Distyl AI | https://distyl.ai
+Zania | https://zania.ai
+Ambience Healthcare | https://ambiencehealthcare.com
+Cyera | https://www.cyera.com
+Signal AI | https://www.signal-ai.com
+Doctronic | https://www.doctronic.ai
+IFS | https://www.ifs.com
+Commure | https://commure.com
+CRED | https://credplatform.com
+Modular | https://www.modular.com
+Feedzai | https://www.feedzai.com
+BigID | https://www.bigid.com
+Helsing | https://www.helsing.ai
+Luma AI | https://lumalabs.ai
+Keychain | https://keychain.com
+Quantum Systems | https://www.quantum-systems.com
+Cowbell | https://cowbell.insure
+Higgsfield | https://higgsfield.ai
+Motive | https://gomotive.com
+Attio | https://attio.com
+Motion | https://www.usemotion.com
+Legora | https://legora.com
+OneTrust | https://www.onetrust.com
+Baseten | https://www.baseten.co
+Ketryx | https://www.ketryx.com
+ThoughtSpot | https://www.thoughtspot.com
+Acronis | https://www.acronis.com
+Burnt | https://getburnt.ai
+Together AI | https://www.together.ai
+LangChain | https://www.langchain.com
+Rezolve AI | https://www.rezolve.ai
+Anything | https://www.createanything.com
+PlayAI | https://play.ai
+Quantexa | https://www.quantexa.com
+Lakera | https://www.lakera.ai
+DualEntry | https://www.dualentry.com
+Tabs | https://tabs.com
+Genstore | https://www.genstore.ai
+SafetyCulture | https://safetyculture.com
+Mycroft AI | https://openconversational.ai
+DeepLens | https://paradigmhealth.ai
+Tesseract Ventures | https://tesseractventures.io
+Trially | https://trially.ai
+LCE | https://learningcareersenvironment.com
+Mov Health | https://movhealth.com
+Supademo | https://supademo.com
+playhaus.tv | https://playhaus.tv
+321GoProject | https://321goproject.com
+PlaBook | https://plabook.com
+RMSF Corporation | https://rmsfcorp.com
+inventXYZ | https://inventxyz.com
+Safe Superintelligence | https://ssi.inc
+Wiz | https://wiz.io
+Pantheon | https://withpantheon.ai
+World Labs | https://worldlabs.ai
+Deel | https://deel.com
+Devoted Health | https://devoted.com
+Hippocratic AI | https://hippocraticai.com
+Whatnot | https://whatnot.com
+Mercury | https://mercury.com
+Figma | https://figma.com
+Stripe | https://stripe.com
+Jeeves | https://tryjeeves.com
+KoBold Metals | https://koboldmetals.com
+ClickUp | https://clickup.com

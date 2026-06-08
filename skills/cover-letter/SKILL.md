@@ -29,7 +29,7 @@ A sequential pipeline with one parallel fan-out at each review. Why it is built 
 ### Step 0 : Load context
 Read, in this order:
 1. The job description. Standing intake: `applications/<Company> - <Role>/jd.md`. If the user names an application whose folder exists, read its `jd.md`. If they paste JD text or give a URL instead, scaffold that folder and save the JD to `jd.md` first (fetch the URL into the file), then proceed. This folder is the packet home: the JD lives here and the finished letter is written back here.
-2. Accomplishment bank (primary fact source): `config/accomplishment-bank.md`, the canonical superset of the candidate's wins with numbers and their real contribution. Pick the stories most relevant to this JD from here.
+2. Accomplishment bank (primary fact source): your about-me.md (the accomplishment bank in your workspace; path = config key accomplishment_bank), the canonical superset of the candidate's wins with numbers and their real contribution. Pick the stories most relevant to this JD from here.
 3. Prior cover letters from this skill's `examples/` and from any letters already filed under `applications/`. Read 1 to 3 for voice, structure, and reusable framings.
 4. Personas: see Step 1. Use whatever reader-persona reference your harness provides, or assemble the default panel below from the JD itself.
 5. Best practices and writing rules: `references/best-practices.md` and `references/writing-rules.md`. Candidate voice: `config/profile.md`.

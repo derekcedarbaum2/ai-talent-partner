@@ -1,7 +1,7 @@
 # Resume writing rules : voice and hard gates
 
 ## Hard gates (a violation fails the artifact)
-1. No fabrication. Every bullet traces to `config/accomplishment-bank.md`. No invented metrics, scope, titles, or dates.
+1. No fabrication. Every bullet traces to your about-me.md (the accomplishment bank in your workspace; path = config key accomplishment_bank). No invented metrics, scope, titles, or dates.
 2. No em-dashes. Commas, colons, and periods only. Strip hidden Unicode (narrow no-break space, zero-width, BOM).
 3. Fixed facts are immutable: companies, employment dates, titles held, education, clearance, contact.
 4. One page unless the role clearly warrants two (very senior or deep government). Cut the weakest-fit bullets first.

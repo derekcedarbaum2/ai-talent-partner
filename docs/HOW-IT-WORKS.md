@@ -13,7 +13,7 @@ which keeps it fast and cheap to run on a schedule.
 
 ## The generator (scripts/run_apply.sh)
 1. apply_scan.py reads the sheet, finds rows marked "Yes" that have no materials yet, and writes a queue.
-2. The model step (prompts/apply.md) builds, per job: a tailored resume (skills/resume-customizer), a cover letter (skills/cover-letter), and application-questions.md answering the posting's substantive questions. Each writing pass runs skills/sense-of-style at least once. Everything traces to config/accomplishment-bank.md; nothing is invented.
+2. The model step (prompts/apply.md) builds, per job: a tailored resume (skills/resume-customizer), a cover letter (skills/cover-letter), and application-questions.md answering the posting's substantive questions. Each writing pass runs skills/sense-of-style at least once. Everything traces to your about-me.md (the accomplishment bank in your workspace); nothing is invented.
 3. apply_mark.py marks a job done once all three files exist, so it is never regenerated.
 
 ## Why the spreadsheet is the interface

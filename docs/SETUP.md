@@ -19,13 +19,13 @@ cp config/terms.example.md      config/terms.md
 cp config/profile.example.md    config/profile.md
 ```
 
-Build `config/accomplishment-bank.md` with the accomplishment-interview skill (do not write it by hand).
+Build your about-me.md (the accomplishment bank in your workspace; path = config key accomplishment_bank) with the accomplishment-interview skill (do not write it by hand).
 Set `backend` in `config.json` to `csv` or `google_sheets`, and adjust the `filters` block to your search.
 
 ## 2. Spreadsheet backend
 
 ### CSV / Excel (zero auth, the default)
-Create `data/jobs.csv` with this header row:
+Create `jobs.csv` in your workspace (the `csv_path`) with this header row:
 
 ```
 Date Found,Company,Job Title,Location,Posted,Job URL,Source,Will I apply?

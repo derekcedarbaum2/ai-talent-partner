@@ -55,7 +55,9 @@ If you change your mind, delete the row or the folder.
 - `skills/resume-customizer`, `skills/cover-letter`, `skills/sense-of-style` : the writing engine.
 - `scripts/` : the deterministic finder (ATS pollers, filters, de-dupe, liveness, sheet I/O) and the generator runner.
 - `templates/resume.html`, `templates/cover-letter.html` : the default styling your materials render into. Restyle freely.
-- `config/` : your company list, match terms, profile, accomplishment bank, and settings. The `.example` files ship; your real ones stay local.
+- `config/` : your company list, match terms, and settings. The `.example` files ship; your real ones stay local.
+- `config/seed-companies/` : starter company lists for defense, robotics, and AI (hundreds of real, public companies). Use them as-is, mix and match, and add any industry you want. The setup skill offers these and researches anything they do not cover.
+- `docs/WORKSPACE.md` : your personal data (accomplishment bank, profile, generated materials) lives in a separate workspace folder you choose at setup, not in this repo. This explains the layout.
 - `launchd/` and `docs/` : scheduler setup for macOS and Linux, plus architecture and auth notes.
 - `AGENTS.md` : how to run the same flows from Codex / Cursor / other agents.
 

@@ -1,0 +1,456 @@
+# Seed company list: Defense / national-security / aerospace
+# Optional starter list. Append the ones you care about into your config/companies.txt,
+# or point the setup skill at this file. Public company names; edit freely.
+
+Anduril | https://www.anduril.com
+Saronic | https://www.saronic.com
+Sierra Space | https://www.sierraspace.com
+Scale AI | https://www.scale.com
+Shield AI | https://www.shield.ai
+Databricks | https://www.databricks.com
+Axiom Space | https://www.axiomspace.com
+Forterra | https://www.forterra.com
+Castelion | https://www.castelion.com
+CesiumAstro | https://www.cesiumastro.com
+PsiQuantum | https://www.psiquantum.com
+OpenAI | https://www.openai.com
+Onebrief | https://www.onebrief.com
+Dataminr | https://www.dataminr.com
+Hadrian | https://www.hadrian.co
+Skydio | https://www.skydio.com
+Impulse Space | https://www.impulsespace.com
+Govini | https://www.govini.com
+Stoke Space | https://www.stokespace.com
+Lambda | https://lambda.ai
+Varda Space Industries | https://www.varda.com
+Applied Intuition | https://www.appliedintuition.com
+JetZero | https://www.jetzero.aero
+APEX | https://www.apexspace.com
+Blue Origin | https://www.blueorigin.com
+Chainalysis | https://www.chainalysis.com
+X-Bow | https://www.xbowsystems.com
+Hermeus | https://www.hermeus.com
+Epirus | https://www.epirusinc.com
+True Anomaly | https://www.trueanomaly.space
+Astranis | https://www.astranis.com
+CHAOS | https://www.chaosinc.com
+Relativity Space | https://www.relativityspace.com
+Oura | https://www.ouraring.com
+Zipline | https://www.zipline.com
+Lyten | https://www.lyten.com
+Vulcan Elements | https://www.vulcanelements.com
+Defense Unicorns | https://www.defenseunicorns.com
+Whoop | https://www.whoop.com
+Antares | https://www.antaresindustries.com
+K2 Space | https://www.k2space.com
+Iceye | https://www.iceye.com
+Ursa Major | https://www.ursamajor.com
+Xona Space Systems | https://www.xonaspace.com
+Firestorm | https://www.launchfirestorm.com
+Tomorrow.io | https://www.tomorrow.io
+Picogrid | https://www.picogrid.com
+Betterup | https://www.betterup.com
+SimSpace | https://www.simspace.com
+Divergent | https://www.divergent3d.com
+Boom Supersonic | https://www.boomsupersonic.com
+Turion Space | https://www.turionspace.com
+Code Metal | https://www.codemetal.ai
+Slingshot Aerospace | https://www.slingshot.space
+Electra.aero | https://www.electra.aero
+Saildrone | https://www.saildrone.com
+Shift5 | https://www.shift5.io
+Re:Build Manufacturing | https://www.rebuildmanufacturing.com
+Nominal | https://www.nominal.io
+Regent | https://www.regentcraft.com
+Starfish Space | https://www.starfishspace.com
+TRM Labs | https://www.trmlabs.com
+Grafana Labs | https://www.grafana.com
+Umbra | https://www.umbra.space
+Altana Technologies | https://www.altana.ai
+Chainguard | https://www.chainguard.dev
+Anaconda | https://www.anaconda.com
+Radiant | https://www.radiantnuclear.com
+Machina Labs | https://www.machinalabs.ai
+Vast Space | https://www.vastspace.com
+Loft Orbital | https://www.loftorbital.com
+NODA AI | https://www.nodaintelligence.ai
+Quindar | https://www.quindar.space
+Vannevar Labs | https://www.vannevarlabs.com
+Compound Eye | https://www.compoundeye.com
+Virtualitics | https://www.virtualitics.com
+Aalyria | https://www.aalyria.com
+Ayar Labs | https://www.ayarlabs.com
+Atom Computing | https://www.atom-computing.com
+Reliable Robotics | https://www.reliable.co
+LeoLabs | https://www.leolabs.space
+Zeno Power | https://www.zenopower.com
+Raft | https://www.teamraft.com
+Overland AI | https://www.overland.ai
+ThinkOrbital | https://www.thinkorbital.com
+Cape | https://www.cape.co
+Ditto | https://www.ditto.com
+Horizon3.ai | https://www.horizon3.ai
+Agility Robotics | https://www.agilityrobotics.com
+DataRobot | https://www.datarobot.com
+Flock Safety | https://www.flocksafety.com
+Lunar Outpost | https://www.lunaroutpost.com
+RED 6 | https://www.red6ar.com
+Viken Detection | https://www.vikendetection.com
+DeepNight | https://deepnight.com
+Strider Technologies | https://www.striderintel.com
+Havoc AI | https://www.havocai.com
+Integrate | https://www.integrate.co
+Noveon | https://www.noveon.co
+Harmonic | https://www.harmonic.fun
+Aeon Industrial | https://aeonindustrial.com
+Allen Control Systems | https://allencontrolsystems.com
+AnySignal | https://anysignal.com
+Aurelius Systems | https://aureliussystems.us
+Blue Water Autonomy | https://blw.ai
+CX2 | https://cx2.com
+Darkhive | https://darkhive.com
+Deterrence | https://deterrence.com
+Distributed Spectrum | https://distributedspectrum.com
+Firestorm Labs | https://firestormlabs.com
+Fuse | https://f.energy
+Mach Industries | https://machindustries.com
+Mara | https://mara.com
+Neros | https://neros.tech
+Pilgrim | https://pilgrim.us
+Rune Technologies | https://runetechnologies.com
+Salient Motion | https://salientmotion.com
+Schemata | https://schemata.com
+Scout AI | https://scout.ai
+Senra Systems | https://senrasystems.us
+Swarm Aero | https://swarm.aero
+Usul | https://usul.ai
+Vatn | https://vatnsystems.com
+Vector | https://vector.tech
+Vermeer | https://vermeer.ai
+AM Kreations | https://amkreations.com
+Terraform Industries | https://terraformindustries.com
+Evolution Space | https://evolutionspace.com
+Spin Garage | https://spingarage.com
+Stratolaunch | https://stratolaunch.com
+Avnos | https://avnos.com
+Clairity Technology | https://clairitytech.com
+HStar | https://hstar.io
+Observable Space | https://observable.space
+Pinto Robotics | https://pintorobotics.com
+reOrbital | https://re-orbital.com
+Airrow | https://airrow.com
+Auron Solutions | https://auron.solutions
+Downmass | https://downmass.com
+Duro | https://durolabs.co
+Ethos Space Resources | https://ethos-space.com
+Flyby Robotics | https://flybyrobotics.com
+Gambit | https://gambit.us
+Illuminant Surgical | https://illuminant.ai
+Macro | https://macro.io
+Odin Dynamics | https://odindynamics.ai
+Ornadyne | https://ornadyne.com
+Quilter | https://quilter.ai
+RFA Electric | https://rfaelectric.com
+Robo | https://robo.ai
+Rollup | https://rollup.systems
+SysGit | https://sysgit.io
+The Rad Team | https://radiationteam.com
+TransAstra | https://transastra.com
+Glenair | https://glenair.com
+Atomic Industries | https://atomic.industries
+Continuum Space Systems | https://continuum-space.com
+Ecliptic Enterprises | https://eclipticenterprises.com
+Elementary | https://elementaryml.com
+Helicity Space | https://helicityspace.com
+Heliogen | https://heliogen.com
+Motiv Space Systems | https://motivss.com
+RealDefense | https://realdefen.se
+Rotor Vault | https://rotorvault.com
+Seleno Industries | https://selenoindustries.com
+ATRX | https://atrx.space
+Jaco Aerospace | https://jacoaerospace.com
+BomForge | https://bomforge.com
+Moonware | https://moonware.com
+Nevoya | https://nevoya.com
+Zeitview | https://zeitview.com
+Airship Industries | https://airship-industries.com
+Astro Mechanica | https://flyastro.com
+Kyte Dynamics | https://kyte.aero
+Parallel Systems | https://moveparallel.com
+Proteus Space | https://proteus-space.com
+Apeel | https://apeel.com
+Redwire | https://rdw.com
+Teledyne FLIR | https://flir.com
+EBAD | https://ebad.com
+PteroDynamics | https://pterodynamics.com
+Quantum-Systems | https://quantum-systems.com
+Hologram | https://hologram.io
+Pacific Fusion | https://pacificfusion.com
+Energy Audit | https://energyaudit.com
+Planetary Utilities | https://planetaryutilities.com
+The Earthineering Co | https://earthineering.company
+Fenix Space | https://fenixspace.com
+Furientis | https://furientis.com
+Outpost | https://outpost.space
+Castheon | https://addmangroup.com
+Frontier Aerospace | https://frontier.us
+Epic Advanced Materials | https://epicbnnt.com
+InVia Robotics | https://inviarobotics.com
+Dyrt | https://thedyrt.com
+Cislune | https://cislune.com
+Framework Automation | https://frameworkautomation.com
+Heaviside Industries | https://theheaviside.com
+Revel | https://revel.io
+Sift | https://siftstack.com
+Kinetic Aero | https://kinetic.aero
+Splash Industries | https://splash9.com
+Widget Makers | https://widgetmakers.com
+Zoo Dev | https://zoo.dev
+AirClient | https://airclient.com
+Amca | https://amca.com
+Arbor Energy | https://arbor.co
+Argo Space | https://argospace.com
+Ares Industries | https://aresindustries.com
+Cambium | https://cambiumcarbon.com
+Charter Space | https://charterspace.com
+Dirac | https://dirac.com
+Drone Forge | https://droneforge.com
+Durin | https://durin.com
+Electric Goddess | https://electricgoddess.co
+First Resonance | https://firstresonance.io
+Forge Atomics | https://forgeatomics.com
+Gallatin | https://gallatin.com
+General Galactic | https://gengalactic.com
+HABIT | https://habit.com
+HiveWatch | https://hivewatch.com
+Hyber | https://hyberdev.com
+Hybron | https://hybron.us
+Launchpad | https://launchpad.us
+LISUS Energy | https://lisusenergy.com
+Long Wall | https://lwall.com
+Lumafield | https://lumafield.com
+Lumaril | https://lumaril.com
+Matter Intelligence | https://matterintelligence.com
+Metal Cross | https://metalcross.com
+Morpheus Space | https://morpheus.space
+Nooks | https://nooks.ai
+Oceanus | https://oceanustechnologies.com
+Pacific Defense | https://pacific-defense.com
+Rainmaker | https://rainmaker.com
+Roboze | https://roboze.com
+Second Order Effects | https://soeffects.com
+Shinkei Systems | https://shinkei.systems
+Skyryse | https://skyryse.com
+Skyton | https://skyton.com
+Smack Technologies | https://smacktechnologies.com
+Soaring Aerospace | https://soaringaerospace.com
+Space Kinetic | https://spacekinetic.com
+Standard Subsea | https://standardsubsea.com
+Tango Robotics | https://tangorobotics.io
+Viridian Space | https://viridianspace.com
+Vuecason | https://vuecason.com
+Western Chemicals | https://westernchemicals.com
+Motivo | https://motivo.com
+General Matter | https://generalmatter.com
+Auriga Space | https://aurigaspace.com
+Harbinger Motors | https://harbingermotors.com
+Orbital Outpost X | https://orbitaloutpostx.com
+Airwai | https://airwai.com
+Cover | https://cover.ai
+Mesh Optical | https://meshoptical.com
+Wake Energy | https://wakeenergy.com
+Blitz | https://blitz.com
+Bohr Systems | https://bohrsystems.us
+Critical Energy | https://criticalenergy.com
+Freeform | https://freeform.co
+Friday Motors | https://fridaymotors.com
+Gradient Robotics | https://gradientrobotics.com
+Hgen | https://hgen.com
+Lazarus Energy | https://lazarusenergy.com
+Moleaer | https://moleaer.com
+Oligo Space | https://oligospace.com
+Quantum Space | https://quantumspace.com
+Reflect Orbital | https://reflectorbital.com
+Starpath Robotics | https://starpath.space
+Stone Power | https://stonepower.us
+Thermopylae Aerospace | https://thermopylae.space
+Valar Atomics | https://valaratomics.com
+Venturi Astrolab | https://astrolab.space
+Andrenam | https://andrenam.com
+Antares Aero | https://antares.aero
+Arc Boats | https://arcboats.com
+Broadata Communications | https://broadata.com
+CarbonBuilt | https://carbonbuilt.com
+Claros | https://claros.tech
+Equatic | https://equatic.tech
+Fortastra | https://fortastra.com
+GITAI | https://gitai.tech
+Heart Aerospace | https://heartaerospace.com
+Inorbit Aerospace | https://inorbitaerospace.com
+Intellisense Systems | https://intellisenseinc.com
+Northwood Space | https://northwoodspace.io
+Titan Dynamics | https://titandynamics.aero
+Upgrade Energy | https://upgradeenergytech.com
+Verus Aerospace | https://verusaerospace.com
+Vital Lyfe | https://vital-lyfe.com
+AC Future | https://acfuture.com
+DZYNE | https://dzyne.com
+Menlo Micro | https://menlomicro.com
+Supernal | https://supernal.aero
+Syntiant | https://syntiant.com
+TRL11 | https://trl11.com
+Xsync AI | https://xsync.ai
+APEX Space and Defense | https://apexsds.com
+Ibis Industries | https://ibis.industries
+Overair | https://overair.com
+TOMI Engineering | https://tomiengineering.com
+Acceliot | https://acceliot.com
+Adient Aerospace | https://elevate-seats.com
+Archer Aviation | https://archer.com
+Karman Space Defense | https://karman-sd.com
+Layup Parts | https://layupparts.com
+RossMerica | https://rossmerica.com
+Volund Manufacturing | https://volundmfg.com
+Virgin Galactic | https://virgingalactic.com
+Brelle | https://brelle.com
+Arkisys | https://arkisys.com
+Dreamstar Lines | https://dreamstarlines.com
+Kinetic Industries | https://kinetic.industries
+Airspace Technologies | https://airspace.com
+Aptera | https://aptera.us
+Apogee Composites | https://apogeecomposites.com
+FlightWave Aerospace | https://flightwave.aero
+MIMO Technik | https://mimotechnik.com
+GrayMatter Robotics | https://graymatter-robotics.com
+Advanced Spade | https://advancedspadecompany.com
+AIBOT | https://aibot.ai
+Airhart Aeronautics | https://airhartaero.com
+Ampaire | https://ampaire.com
+Carbon Capture | https://carboncapture.com
+Cofactr | https://cofactr.com
+Coronal | https://coronal.com
+ExLabs | https://exlabs.space
+Karman Industries | https://karmanindustries.com
+M4 Engineering | https://m4-engineering.com
+Mayman Aerospace | https://maymanaerospace.com
+NuSpace | https://nuspace.com
+Odys Aviation | https://odysaviation.com
+Open X | https://tryopenx.com
+Orbital Operations | https://orbitalops.tech
+Rebel Space Technologies | https://rebelspacetech.com
+Rocket Lab | https://rocketlabusa.com
+Spaceium | https://spaceium.com
+SpinLaunch | https://spinlaunch.com
+Starship Technologies | https://starship.xyz
+Deepwater Exploration | https://dwell.tech
+Natilus | https://natilus.co
+Seasats | https://seasats.com
+SkySafe | https://skysafe.io
+Terran Orbital | https://terranorbital.com
+ABL Space Systems | https://ablspacesystems.com
+Phase Four | https://phasefour.io
+Wardstone | https://wardstone.space
+Orbital Compute | https://orbital.inc
+Sophia Space | https://sophia.space
+Icarus | https://www.icarus.one
+Prime Lightworks | https://www.primelightworks.com
+Parabilis Space Technologies | https://parabilis-space.com
+Vulcan Wireless | https://www.vulcanwireless.com
+mPower Technology | https://mpowertech.com
+ORBES | https://orbes.space
+Nidus Defense | https://www.nidusdef.com
+Kinetic Analytics | https://kineticanalytics.com
+Kairos AeroTechnologies | https://kairosaerotechnologies.com
+Monolyth | https://monolythtech.com
+Digital Force Technologies | https://www.digitalforcetech.com
+Citadel Defense | https://www.dronedefense.com
+Cognicom | https://cognicom.com
+JASR Systems | https://www.jasr.systems
+HyperKelp | https://www.hyperkelp.com
+OmicronVis | https://www.omicronvis.com
+ModalAI | https://www.modalai.com
+TILT Autonomy | https://tiltautonomy.com
+Senseeker Engineering | https://www.senseeker.com
+TF Vector | https://www.tfvector.com
+HADT | https://hadt.io
+Silent Arrow | https://www.silentarrow.com
+Notus Autonomous Systems | https://notussystems.com
+Seaflight Technologies | https://www.seaflight.tech
+Talyn Air | https://www.talyn.com
+JetPack Aviation | https://jetpackaviation.com
+LaunchPoint EPS | https://launchpointeps.com
+Unmanned Aerospace | https://unmanned-aerospace.com
+Starling Systems | https://starling-systems.com
+Akido Labs | https://www.akidolabs.com
+Serif Health | https://www.serifhealth.com
+Juicebox | https://juicebox.ai
+Superunit | https://superunit.com
+Yondu | https://www.yondu.ai
+Endstack | https://endstack.com
+Voker | https://voker.ai
+Merlin AI | https://merlin.build
+Opensteer | https://opensteer.com
+Scanbase | https://scanbase.com
+Primer | https://primer.ai
+PARES AI | https://www.pares.ai
+Pixley AI | https://pixley.ai
+Plotdrive | https://plotdrive.com
+goodfin | https://www.goodfin.com
+Sapling.ai | https://sapling.ai
+MixerBox | https://www.mixerbox.com
+AnythingLLM | https://anythingllm.com
+Embrace | https://embrace.io
+AcquiOS | https://acquios.ai
+Opdo | https://opdo.ai
+NeonCue | https://neoncue.com
+Kolo AI | https://kolo.ai
+Decide AI | https://trydecide.ai
+Zenerate | https://zenerate.ai
+Easel AI | https://easelapps.ai
+VenHub | https://www.venhub.com
+Luminora | https://www.luminora.ai
+Mocai | https://mocai.ai
+Vistry | https://vistry.ai
+Promethean AI | https://prometheanai.com
+VERSES | https://www.verses.ai
+Miso Robotics | https://misorobotics.com
+Impossible Metals | https://impossiblemetals.com
+Unwrap.AI | https://www.unwrap.ai
+Veles | https://veles.ai
+Netradyne | https://www.netradyne.com
+Brain Corp | https://www.braincorp.com
+Personal AI | https://www.personal.ai
+Yembo | https://www.yembo.ai
+EyePop.ai | https://eyepop.ai
+ReflexAI | https://www.reflexai.com
+WowYow | https://www.wowyow.com
+Kneron | https://www.kneron.com
+Tactus AI | https://tactus.ai
+NeuralPoint | https://www.neuralpoint.ai
+Iambic Therapeutics | https://www.iambic.ai
+Model Medicines | https://www.modelmedicines.com
+Genesis Molecular AI | https://www.genesis.ml
+Worth AI | https://www.worthai.com
+Manifold | https://www.manifold.security
+Juno | https://www.juno.tax
+Carlsmed | https://carlsmed.com
+Helio Genomics | https://heliohealth.com
+Revive | https://revive.realestate
+FlavorHawk | https://www.flavorhawk.com
+Divinci AI | https://divinci.ai
+WeReno | https://wereno.com
+Aetherflux | https://aetherflux.com
+Air Space Intelligence | https://airspaceintelligence.com
+Armada | https://armada.ai
+Base Power | https://basepowercompany.com
+Diode | https://diode.io
+Exowatt | https://exowatt.com
+Firehawk Aerospace | https://firehawkaerospace.com
+Galvanick | https://galvanick.com
+Physical Intelligence | https://physicalintelligence.company
+Reveal | https://revealtech.ai
+Solugen | https://solugen.com
+SpaceX | https://spacex.com
+Swan | https://swan.tech
+Venus Aerospace | https://venusaero.com
+Zeromark | https://zeromark.com

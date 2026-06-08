@@ -1,0 +1,191 @@
+# Seed company list: Robotics / automation
+# Optional starter list. Append the ones you care about into your config/companies.txt,
+# or point the setup skill at this file. Public company names; edit freely.
+
+4D1 | https://4d1.io
+Adeeb Robotics | https://adeebrobotics.com
+Anyware Robotics | https://anyware-robotics.com
+Agora Robotics | https://agorarobotics.com
+Aion Robotics | https://aionrobotics.com
+Alsanor | https://alsanor.com
+ALTO Robotics | https://altorobotics.ai
+Angsa Robotics | https://angsa-robotics.com
+Apricity Robotics | https://apricityrobotics.com
+ATDEV | https://assistivetech.dev
+Atlas Robotics | https://atlas-robotics.com
+Bedrock Robotics | https://bedrockrobotics.com
+Builder Assist | https://builder-assist.com
+C&P R&D | https://cnprnd.com
+Captic | https://captic.com
+Cartwheel Robotics | https://cartwheelrobotics.com
+Cerebionics | https://cerebionics.com
+Cerulion | https://cerulion.com
+Cohesive Robotics | https://cohesiverobotics.com
+Compliance Robotics | https://compliance-robotics.com
+Copper Robotics | https://copper-robotics.com
+Cosmic Robotics | https://cosmicrobotics.com
+Dapster AI | https://dapster.ai
+Destro AI | https://destroai.com
+Dopl Technologies | https://dopltechnologies.com
+Endox AI | https://endoxai.com
+ForSight Robotics | https://forsightrobotics.com
+Foxglove | https://foxglove.dev
+Freestyle Research | https://freestyleresearch.com
+Glidance | https://glidance.io
+Humanoid | https://thehumanoid.ai
+Icarus Robotics | https://icarusrobotics.com
+iHub Research and Robotics | https://ihubrobotics.com
+Inception Robotics | https://inceptionrobotics.ai
+Jacobi Robotics | https://jacobirobotics.com
+Journey Robotics | https://journeyrobotics.com
+K-Scale Labs | https://kscale.dev
+Karman+ | https://karmanplus.com
+Kinisi Robotics | https://kinisi.com
+Kobots Company ApS | https://kobots.com
+Kyber Labs | https://kyberlabs.ai
+Luminous Robotics | https://luminousrobotics.com
+Manifest | https://the-manifest.com
+Mantis Robotics | https://mantis-robotics.com
+MAXimuz Technology | https://maximuz.tech
+Mbodi AI | https://mbodi.ai
+MecaBotiX | https://mecabotix.com
+Minitrucks Robotics | https://minitrucks-robotics.fr
+MOBY Robotics | https://mobyrobotics.com
+Rob'OCC | https://robocc.fr
+Movu Robotics | https://movu-robotics.com
+Movwize | https://movwize.com
+Muse | https://muse-gr.com
+Mytra | https://mytra.ai
+Neuronaix | https://neuronaix.com
+Nexobot | https://nexobot.com.au
+Nexterity | https://nexterity.tech
+NuPort Robotics | https://nuport.ai
+Open Droids | https://opendroids.com
+OpenMind | https://openmind.com
+Ostirion | https://ostirion.net
+Ping | https://pingthru.com
+Paradigm Robotics | https://paradigmrobotics.com
+Philon | https://philon.ai
+QuikBot Technologies | https://quikbot.ai
+R2 Labs | https://r2-labs.io
+Reframe Systems | https://reframe.systems
+Resix Robotics | https://resix.bot
+Revolute Robotics | https://revoluterobotics.com
+ReviMo | https://revimo.care
+RIF Robotics | https://rifrobotics.com
+Riibotics | https://riibotics.io
+RoboChef | https://robochef.ai
+RoboForce | https://roboforce.ai
+Robot on Rails | https://robotonrails.com
+Roboto AI | https://roboto.ai
+Roboworx | https://roboworx.io
+Rotate8 | https://rotate8.com
+Sakar Robotics | https://sakarrobotics.com
+Sensible Robotics | https://sensiblerobotics.ai
+Sereact | https://sereact.ai
+Silana | https://silana.com
+Smarobix | https://smarobix.com
+Sonair | https://sonair.com
+Summer Robotics | https://summerrobotics.ai
+Tatum Robotics | https://tatumrobotics.com
+TeknTrash Robotics | https://tekntrash.com
+Tension Dynamics | https://tensiondynamics.com
+The Mobile Robot Company | https://mobilerobot.com
+The Shape Sensing Company | https://shapesensing.com
+TP7 AI & Robotics | https://tp7.ai
+Transitive Robotics | https://transitiverobotics.com
+Under Control Robotics | https://noblemachines.ai
+Vyom OS | https://vyomos.org
+Workr Labs | https://workr.com
+X Square Robot | https://x2robot.com
+Xaba | https://xaba.ai
+Yona Robotics | https://yona-robotics.com
+Zero Industries | https://zeroindustries.eu
+Figure | https://www.figure.ai
+Auterion | https://auterion.com
+Unitree Robotics | https://www.unitree.com
+Neuralink | https://www.neuralink.com
+Apptronik | https://apptronik.com
+Agibot | https://www.agibot.com
+Flytrex | https://www.flytrex.com
+Dyna Robotics | https://dynarobotics.ai
+Zoox | https://www.zoox.com
+ANYbotics | https://www.anybotics.com
+1X | https://www.1x.tech
+Diligent Robotics | https://diligentrobots.com
+Field AI | https://www.fieldai.com
+Orchard Robotics | https://www.orchard.ai
+Boston Dynamics | https://bostondynamics.com
+Perforce Software | https://www.perforce.com
+Roots | https://bevaya.ai
+Hyphen | https://usehyphen.com
+DroneDeploy | https://dronedeploy.com
+Skild AI | https://www.skild.ai
+Avride | https://www.avride.ai
+Sight Machine | https://sightmachine.com
+Sola | https://www.sola.ai
+RIVR | https://www.rivr.ai
+ICON | https://www.iconbuild.com
+GreyOrange | https://www.greyorange.com
+NEURA Robotics | https://neura-robotics.com
+Simbe Robotics | https://www.simberobotics.com
+Bear Robotics | https://bearrobotics.ai
+Pyka | https://www.flypyka.com
+Near Space Labs | https://www.nearspacelabs.com
+Roam Robotics | https://www.roamrobotics.com
+Rokid | https://rokid.com
+Eyebot | https://www.eyebot.co
+Aigen | https://aigen.io
+Exotec | https://www.exotec.com
+Imbue | https://imbue.com
+Refiberd | https://refiberd.com
+Neptune Robotics | https://neptune-robotics.com
+ARX Robotics | https://www.arx-robotics.com
+Ronovo Surgical | https://www.ronovo.com
+Command Alkon | https://www.commandalkon.com
+Swift Navigation | https://swiftnav.com
+Space Forge | https://spaceforge.com
+AMP | https://ampsortation.com
+Distalmotion | https://www.distalmotion.com
+Solideon | https://www.solideon.com
+Hoverfly | https://www.hoverflytech.com
+SkyDrive | https://skydrive.co.jp
+Dexterity | https://www.dexterity.ai
+DoiT | https://www.doit.com
+Pickle Robot | https://www.picklerobot.com
+Chef Robotics | https://chefrobotics.ai
+Amplio | https://www.amplio.com
+Carbon Robotics | https://carbonrobotics.com
+Asylon | https://asylonrobotics.com
+Bonsai Robotics | https://www.bonsairobotics.ai
+Origin Robotics | https://origin-robotics.com
+InOrbit | https://www.inorbit.ai
+Andromeda Robotics | https://andromedarobotics.ai
+Deep Robotics | https://www.deeprobotics.cn
+Freeform | https://freeform.co
+Dusty Robotics | https://dustyrobotics.com
+Xingmai Innovation | https://www.xingmai.com
+Matic | https://maticrobots.com
+The Bot Company | https://www.bot.co
+Nuro | https://nuro.ai
+SwarmFarm Robotics | https://www.swarmfarm.com
+Aerones | https://www.aerones.com
+AnthroTek | https://www.anthrotek.com
+HAI ROBOTICS | https://www.hairobotics.com
+Genesis AI | https://genesis.ai
+American Robotics | https://www.american-robotics.com
+Multiply Labs | https://www.multiplylabs.com
+Coco | https://www.cocodelivery.com
+CMR Surgical | https://cmrsurgical.com
+Wandercraft | https://www.wandercraft.eu
+Persona AI | https://persona.ai
+ENGINEAI | https://en.engineai.com.cn
+Built Robotics | https://www.builtrobotics.com
+Saga Robotics | https://sagarobotics.com
+Vayu Robotics | https://www.vayurobotics.com
+Telexistence | https://tx-inc.com
+RISE Robotics | https://www.riserobotics.com
+Cortical Labs | https://corticallabs.com
+Mobot | https://mobot.io
+Exail Technologies | https://www.exail-technologies.com
+RobCo | https://www.rob.co

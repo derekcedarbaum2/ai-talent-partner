@@ -1,20 +1,26 @@
 {
   "_comment": "Copy this to config/config.json and edit. The /setup skill writes this for you.",
 
+  "workspace_root": "~/job-search",
+  "_workspace_root_note": "Where YOUR personal job-search data lives, separate from this code repo. The /setup skill asks you where to put it and scaffolds the structure (about-me.md, profile.md, applications/, jobs.csv). Keep the personal paths below pointed inside it. See docs/WORKSPACE.md.",
+
   "backend": "csv",
   "_backend_options": "csv | google_sheets",
 
-  "csv_path": "./data/jobs.csv",
+  "csv_path": "~/job-search/jobs.csv",
   "google_sheet_id": "PASTE_YOUR_SHEET_ID_HERE",
   "_google_sheet_note": "Only used when backend=google_sheets. The ID is the long string in the sheet URL.",
 
   "companies_file": "config/companies.txt",
   "terms_file": "config/terms.md",
-  "profile_file": "config/profile.md",
-  "accomplishment_bank": "config/accomplishment-bank.md",
+  "_search_config_note": "companies.txt and terms.md are search SETTINGS and stay in the repo config/ (gitignored). Starter company lists live in config/seed-companies/.",
 
-  "applications_dir": "./applications",
-  "_applications_dir_note": "Where generated resume/cover-letter/answers land, one folder per job.",
+  "profile_file": "~/job-search/profile.md",
+  "accomplishment_bank": "~/job-search/about-me.md",
+  "_about_me_note": "about-me.md IS the accomplishment bank: every accomplishment, tagged, that the resume and cover-letter skills select from. Built by the accomplishment-interview skill. Lives in your workspace, never in the repo.",
+
+  "applications_dir": "~/job-search/applications",
+  "_applications_dir_note": "Where generated resume/cover-letter/answers land, one folder per job, inside your workspace.",
 
   "resume_template": "templates/resume.html",
   "cover_letter_template": "templates/cover-letter.html",

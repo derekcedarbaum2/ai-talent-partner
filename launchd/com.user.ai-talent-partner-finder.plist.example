@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  macOS launchd job for the FINDER (runs every 4 hours).
+  1. Replace REPO_PATH with the absolute path to your clone.
+  2. Replace USERNAME if needed.
+  3. Save as ~/Library/LaunchAgents/com.user.ai-talent-partner-finder.plist (drop the .example).
+  4. Load it: launchctl load ~/Library/LaunchAgents/com.user.ai-talent-partner-finder.plist
+  launchd only fires while the Mac is awake; a missed run catches up next time.
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.user.ai-talent-partner-finder</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/zsh</string>
+        <string>REPO_PATH/scripts/run_finder.sh</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict><key>Hour</key><integer>0</integer><key>Minute</key><integer>17</integer></dict>
+        <dict><key>Hour</key><integer>4</integer><key>Minute</key><integer>17</integer></dict>
+        <dict><key>Hour</key><integer>8</integer><key>Minute</key><integer>17</integer></dict>
+        <dict><key>Hour</key><integer>12</integer><key>Minute</key><integer>17</integer></dict>
+        <dict><key>Hour</key><integer>16</integer><key>Minute</key><integer>17</integer></dict>
+        <dict><key>Hour</key><integer>20</integer><key>Minute</key><integer>17</integer></dict>
+    </array>
+    <key>RunAtLoad</key>
+    <false/>
+    <key>StandardOutPath</key>
+    <string>REPO_PATH/finder.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>REPO_PATH/finder.err.log</string>
+</dict>
+</plist>

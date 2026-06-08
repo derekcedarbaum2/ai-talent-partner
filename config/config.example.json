@@ -1,0 +1,54 @@
+{
+  "_comment": "Copy this to config/config.json and edit. The /setup skill writes this for you.",
+
+  "backend": "csv",
+  "_backend_options": "csv | google_sheets",
+
+  "csv_path": "./data/jobs.csv",
+  "google_sheet_id": "PASTE_YOUR_SHEET_ID_HERE",
+  "_google_sheet_note": "Only used when backend=google_sheets. The ID is the long string in the sheet URL.",
+
+  "companies_file": "config/companies.txt",
+  "terms_file": "config/terms.md",
+  "profile_file": "config/profile.md",
+  "accomplishment_bank": "config/accomplishment-bank.md",
+
+  "applications_dir": "./applications",
+  "_applications_dir_note": "Where generated resume/cover-letter/answers land, one folder per job.",
+
+  "resume_template": "templates/resume.html",
+  "cover_letter_template": "templates/cover-letter.html",
+
+  "model": "sonnet",
+  "_model_note": "Model for the headless generation passes. sonnet is the cost-sane default.",
+
+  "finder_schedule": "17 */4 * * *",
+  "_finder_schedule_note": "Cron expression for the job-finder. Default: every 4 hours at :17.",
+  "apply_schedule": "7 9,14,19 * * *",
+  "_apply_schedule_note": "Cron for the resume/cover-letter generator. Default: 9:07, 14:07, 19:07.",
+
+  "web_shard_count": 24,
+  "_web_shard_note": "Non-ATS companies are checked 1/N per run to spread load. Raise N if you add many companies.",
+
+  "google_token_path": "~/.config/ai-talent-partner/google_token.json",
+  "_google_token_note": "Only used when backend=google_sheets. JSON file holding an OAuth refresh token plus client_id and client_secret. See docs/SETUP.md. Leave as the default unless you store it elsewhere.",
+
+  "filters": {
+    "_note": "Hard filters applied in scripts/poll.py and re-applied in the generation prompts. Set any value to null to disable that filter.",
+    "us_only": true,
+    "_us_only_note": "true drops postings whose location is clearly foreign with no US option. Set false for a global search.",
+    "experience_ceiling_years": 10,
+    "_experience_ceiling_note": "Drop a posting if its JD demands at least this many years in your field. null disables.",
+    "experience_ceiling_field": "product",
+    "_experience_ceiling_field_note": "Word that must appear near the years requirement for the ceiling to fire (e.g. 'product', 'engineering').",
+    "secondary_experience_ceiling_years": 5,
+    "secondary_experience_ceiling_field": "saas",
+    "_secondary_note": "Optional second years/field rule, e.g. 5+ yrs SaaS. Set either key null to disable.",
+    "salary_floor_usd": 150000,
+    "_salary_floor_note": "Drop a posting if it states a salary whose top figure is below this. Postings with no salary are kept. null disables.",
+    "company_location_rules": [
+      {"company": "ExampleCorp", "allow_only": ["remote", "los angeles"]}
+    ],
+    "_company_location_rules_note": "Per-company overrides. A posting from a listed company is dropped unless its location contains one of allow_only (case-insensitive substring). Empty list disables."
+  }
+}

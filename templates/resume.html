@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  ai-talent-partner : RESUME TEMPLATE
+  This is the default styling + structure your tailored resumes render into.
+  The /resume-customizer skill fills it from your accomplishment bank + the job description.
+  The sample content below (a fictional "Jordan Avery") shows the target writing style:
+  every bullet is did-X → resulting-in-Y → with-outcome-Z, key numbers bolded, no fluff.
+  Swap colors/fonts in :root if you want your own look; keep the structure.
+-->
+<head>
+<meta charset="utf-8">
+<title>Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --charcoal:       #1C1C1C;
+    --text-body:      #333333;
+    --text-secondary: #666666;
+    --accent:         #505a70;
+    --accent-light:   #d0d8e8;
+    --border:         #E5E5E5;
+    --bg:             #FFFFFF;
+    --bg-card:        #F7F8FA;
+    --teal:           #3A6B8C;
+    --red:            #9a3434;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Inter', -apple-system, sans-serif; font-size: 9.7px; line-height: 1.36; color: var(--text-body); background: var(--bg); margin: 0 auto; padding: 0; }
+  @page { size: letter; margin: 0.32in 0.5in; }
+  @media print { body { padding: 0; max-width: none; } .page-break { page-break-before: always; } .no-break { page-break-inside: avoid; } }
+  h1 { font-size: 26px; font-weight: 800; margin: 0 0 3px; color: var(--charcoal); letter-spacing: -0.5px; }
+  h2 { font-size: 13px; font-weight: 700; margin: 6px 0 3px; padding-left: 10px; border-left: 3px solid var(--accent); color: var(--charcoal); line-height: 1.3; text-transform: uppercase; letter-spacing: 1px; }
+  h3 { font-size: 12px; font-weight: 700; margin: 7px 0 1px; color: var(--charcoal); }
+  p { margin: 4px 0; }
+  strong { color: var(--charcoal); font-weight: 600; }
+  em { font-style: italic; }
+  .header-meta { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-secondary); margin-bottom: 6px; }
+  .role-block { margin: 8px 0 10px 0; padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--teal); border-radius: 4px; page-break-inside: auto; }
+  h4 { font-size: 11px; font-weight: 700; margin: 7px 0 2px 0; color: var(--charcoal); display: flex; justify-content: space-between; align-items: baseline; gap: 12px; page-break-after: avoid; }
+  h4 .dates { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--teal); }
+  .company-meta { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-secondary); margin-bottom: 4px; }
+  .lede { color: var(--text-body); margin: 3px 0 4px 0; }
+  ul { padding-left: 16px; margin: 2px 0 0 0; }
+  li { margin: 1px 0; line-height: 1.3; }
+  .skills { padding: 2px 0 0 0; margin: 4px 0 0 0; font-size: 9.5px; line-height: 1.6; }
+  .skills strong { color: var(--charcoal); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
+  .company-section { page-break-inside: avoid; }
+  .quote-box { margin: 4px 0 5px 0; padding: 4px 10px; background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 4px; font-style: italic; color: var(--text-body); }
+  .quote-box .attribution { font-style: normal; color: var(--text-secondary); font-size: 9.5px; }
+  .footer { margin-top: 22px; padding-top: 10px; border-top: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 8.5px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); text-align: center; }
+</style>
+</head>
+<body>
+
+<h1>Jordan Avery</h1>
+<div class="header-meta">City, ST &nbsp;•&nbsp; (555) 123-4567 &nbsp;•&nbsp; jordan.avery@email.com</div>
+
+<h2>About</h2>
+<p>10+ years building 0-to-1 software products. Most recently a senior PM at a Series-B SaaS company, where I led product from first prototype (<strong>$8M ARR, 3 enterprise design partners</strong>) through GA and into a platform used by 200+ teams. I pair hands-on discovery with hard prioritization, and I ship.</p>
+
+<h2>Work Experience</h2>
+
+<h3>Northwind Software</h3>
+<div class="company-meta">City, ST &nbsp;•&nbsp; Jan 2021 – Present</div>
+<p class="lede"><strong>Northwind</strong> is a workflow-automation platform for operations teams. I owned the core product surface that turns manual back-office processes into automated, auditable flows.</p>
+<div class="quote-box">"Set the bar for how we scope and ship." <span class="attribution">VP Product, Northwind, on the platform rebuild</span></div>
+
+<h4><span>Senior Product Manager</span><span class="dates">Jun 2023 – Present</span></h4>
+<ul>
+  <li>Led the <strong>platform rebuild</strong> from a single-use tool to a configurable workflow engine, <strong>growing it to 200+ teams</strong> and cutting average setup time from <strong>days to under an hour</strong>.</li>
+  <li>Shipped an <strong>AI-assisted setup flow</strong> that auto-drafts workflows from a plain-language description, lifting <strong>activation rate from ~40% to ~70%</strong> for new accounts.</li>
+  <li>Ran discovery with <strong>30+ operations leaders</strong>, turning recurring pain into a prioritized roadmap that closed <strong>3 seven-figure expansions</strong>.</li>
+</ul>
+
+<h4><span>Product Manager</span><span class="dates">Jan 2021 – Jun 2023</span></h4>
+<ul>
+  <li>Owned the first GA release of the reporting product, taking it from <strong>prototype to $8M ARR</strong> with 3 enterprise design partners.</li>
+  <li>Root-caused a <strong>reliability defect</strong> blocking enterprise rollout to a data-pipeline bottleneck; drove the fix that cut error rates <strong>~75%</strong> and unblocked two large deals.</li>
+</ul>
+
+<div class="company-section">
+<h3>Brightline Labs &nbsp;·&nbsp; Founding Product / GTM</h3>
+<div class="company-meta">City, ST &nbsp;•&nbsp; 2016 – 2020</div>
+<p class="lede">Employee #6 at an early-stage startup selling into a market that didn't yet know it needed the product. Built the sales motion, the pricing model, and the category from nothing.</p>
+<ul>
+  <li>Closed the company's first <strong>7-figure deals</strong> and scaled ARR <strong>~35% annually</strong> as the first AE, building CRM, pipeline, and process before a sales team existed.</li>
+  <li>Built the <strong>pricing model</strong> (usage-based, benchmarked to customer savings) that became the revenue engine and grew average deal size.</li>
+</ul>
+</div>
+
+<h2>Skills</h2>
+<div class="skills">
+  <strong>Product Leadership:</strong> &nbsp;Product Strategy &nbsp;·&nbsp; Roadmapping &nbsp;·&nbsp; 0-to-1 Development &nbsp;·&nbsp; Platform Design &nbsp;·&nbsp; Pricing &amp; Packaging<br>
+  <strong>Customer &amp; Research:</strong> &nbsp;User Research &nbsp;·&nbsp; Stakeholder Management &nbsp;·&nbsp; Requirements &nbsp;·&nbsp; Discovery<br>
+  <strong>Process &amp; Tools:</strong> &nbsp;Jira &nbsp;·&nbsp; PRD Authoring &nbsp;·&nbsp; Experimentation &nbsp;·&nbsp; Analytics &nbsp;·&nbsp; Cross-Functional Leadership<br>
+  <strong>AI:</strong> &nbsp;LLM Tooling &nbsp;·&nbsp; Prompt Engineering &nbsp;·&nbsp; Agentic Workflows &nbsp;·&nbsp; AI Product Strategy
+</div>
+
+<h2>Education</h2>
+<p><strong>State University</strong> &nbsp;•&nbsp; 2008 – 2012<br>
+BA, Field of Study</p>
+
+</body>
+</html>

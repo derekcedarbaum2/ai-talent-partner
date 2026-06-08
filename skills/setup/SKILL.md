@@ -1,0 +1,82 @@
+---
+name: setup
+description: First-run onboarding for ai-talent-partner. Runs when someone clones the repo and opens it with Claude Code or Codex. Interviews the user, builds their config, company list, match terms, and accomplishment bank, sets up the spreadsheet, installs the schedulers, and explains the Yes/No loop. Trigger phrases include "set up", "setup", "get started", "onboard", "/setup", "initialize", or opening a freshly cloned repo.
+---
+
+# ai-talent-partner : Setup
+
+You are onboarding a new user of `ai-talent-partner`, a self-hosted AI job-search agent.
+By the end they have: a configured tracker that finds matching jobs on a schedule, a spreadsheet
+they curate, and an auto-generator that writes a tailored resume, cover letter, and application
+answers for any job they mark "Yes". Be efficient and concrete. Do real work, not just explanation.
+
+If you are running in Claude Code, use the AskUserQuestion tool for the structured choices below.
+If you are in Codex or another agent without that tool, ask the same questions inline, one cluster
+at a time, and wait for answers.
+
+## Step 0 : Orient
+Read `README.md`, `config/config.example.json`, and the three `config/*.example.md` files so you
+know the schema you are filling. Confirm `python3` and (for Claude Code) the `claude` CLI exist.
+
+## Step 1 : Interview the user, gathering raw material first
+Ask for source material up front, because everything downstream is better when seeded from real
+documents instead of cold recall. Read or fetch everything they provide; it seeds the bank.
+
+1. Existing resume(s): ask for the file path(s) or pasted text. Accept PDF, docx, md, txt.
+2. Existing cover letter(s), if any: path or paste.
+3. LinkedIn: the profile URL, or a screenshot / exported PDF if the profile is private.
+4. Portfolio / personal site / GitHub: URLs. For GitHub, ask whether to scan pinned repos for project proof.
+
+Then the structured preferences (AskUserQuestion clusters):
+
+- Spreadsheet backend: Google Sheets (shareable, needs Google auth once) versus local CSV/Excel (zero auth). See Step 3.
+- Target roles / titles: the exact titles they would take. Push for SPECIFIC real titles, not "any PM role", but do NOT over-constrain. Include obvious variants and adjacent titles so good roles are not missed. A good list is roughly 6 to 15 titles plus a short exclusions list.
+- Target industries: the sectors to build the company list from.
+- Target geographies and remote preference: metros, regions, "US-only", "remote ok".
+- Hard constraints: salary floor, seniority ceiling (for example "nothing requiring 10+ years"), companies to special-case, anything to exclude.
+
+When helping with titles and keywords, coach them. Too narrow ("Director of AI Product Management, Defense")
+misses real matches; too broad ("Manager") drowns them in noise. Aim for the middle and let the filters do the rest.
+
+## Step 2 : Build the config artifacts
+Write these into `config/` (the real files, not the `.example` ones):
+
+- `config/profile.md`, from `config/profile.example.md`, filled from the interview.
+- `config/terms.md`: the title list, exclusions, and the hard filters they chose (location, experience ceiling, salary floor, company special-cases). Mirror the format in `config/terms.example.md`.
+- `config/companies.txt`: research and generate the list. Use web search to find companies in their target industries and geographies, prioritizing actively-hiring firms. For each, prefer the `ats:provider:token` form by checking for a Greenhouse/Lever/Ashby board; fall back to the homepage URL. Aim for a real starter set (50 to a few hundred). Tell the user the count and that they can edit the file anytime.
+- `config/accomplishment-bank.md`: hand off to the accomplishment-interview skill in Step 4. Do not build it inline.
+- `config/config.json`, from `config/config.example.json`, with backend, paths, schedules, and applications_dir set.
+
+## Step 3 : Set up the spreadsheet
+The tracker writes one row per found job with these columns, A to H:
+
+`Date Found | Company | Job Title | Location | Posted | Job URL | Source | Will I apply?`
+
+Column H ("Will I apply?") is the control. The user marks Yes and the generator builds their materials.
+
+- CSV/Excel backend: create `data/jobs.csv` with that header row. Done.
+- Google Sheets backend: create a new sheet (or use one they provide), set the header row, and put its ID in `config.json`. This needs Google auth once. In Claude Code, use a connected Google Drive/Sheets MCP if present, otherwise walk them through creating a sheet, pasting the ID, and the one-time OAuth that `scripts/sheet_io.py` uses. See `docs/SETUP.md`.
+
+## Step 4 : Build the accomplishment bank
+Invoke the accomplishment-interview skill. It ingests the resume, LinkedIn, and portfolio from Step 1,
+drafts a bank, then interviews the user to fill gaps and quantify outcomes (did X, resulting in Y,
+outcome Z). This is the single highest-leverage artifact: every tailored resume and cover letter draws
+from it. Do not skip it.
+
+## Step 5 : First run and scheduling
+- Resolve ATS boards: `python3 scripts/resolve_ats.py`, then report how many companies are on pollable boards versus the web path.
+- Do one finder run now: `python3 scripts/poll.py` then the generation/append step, so the user sees rows appear.
+- Install the schedulers. On macOS, copy the example plists in `launchd/` (filling in the repo path) and load them with `launchctl load`. On Linux, add the two cron lines from `docs/SETUP.md`. Explain that the finder runs every ~4h and the generator a few times a day.
+
+## Step 6 : Explain the Yes/No loop (the core workflow)
+Tell the user plainly: every few hours the finder adds new matching jobs to their sheet. They open it,
+skim, and in the "Will I apply?" column type Yes for any they want to pursue (blank or No otherwise).
+The next time the generator runs, it produces a tailored resume, cover letter, and answers to the
+posting's substantive questions for every Yes row, into `applications/<Company> - <Role>/`. Review,
+finalize, send. Point them at README.md for the same instructions and at `config/` for everything they can tune.
+
+## Rules
+- Never invent the user's accomplishments or numbers. Everything traces to their source material or their answers.
+- Keep their real `config/*` files local (gitignored). Only `.example` files are committed.
+- If a tool is missing (no Google MCP, no headless model), degrade gracefully and explain the manual step.
+- Be concrete and finish the job. By the end, a finder run has produced rows and the user knows the loop.

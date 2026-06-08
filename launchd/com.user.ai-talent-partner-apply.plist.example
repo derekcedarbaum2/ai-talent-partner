@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  macOS launchd job for the GENERATOR (runs a few times a day).
+  It builds resume + cover letter + answers for every job you marked "Yes" that has no materials yet.
+  1. Replace REPO_PATH with the absolute path to your clone.
+  2. Save as ~/Library/LaunchAgents/com.user.ai-talent-partner-apply.plist (drop the .example).
+  3. Load it: launchctl load ~/Library/LaunchAgents/com.user.ai-talent-partner-apply.plist
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.user.ai-talent-partner-apply</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/zsh</string>
+        <string>REPO_PATH/scripts/run_apply.sh</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict><key>Hour</key><integer>9</integer><key>Minute</key><integer>7</integer></dict>
+        <dict><key>Hour</key><integer>14</integer><key>Minute</key><integer>7</integer></dict>
+        <dict><key>Hour</key><integer>19</integer><key>Minute</key><integer>7</integer></dict>
+    </array>
+    <key>RunAtLoad</key>
+    <false/>
+    <key>StandardOutPath</key>
+    <string>REPO_PATH/apply.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>REPO_PATH/apply.err.log</string>
+</dict>
+</plist>

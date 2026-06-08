@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  ai-talent-partner : COVER LETTER TEMPLATE
+  Default styling + structure for tailored cover letters. The /cover-letter skill fills it
+  from your accomplishment bank + the job description. Sample content (fictional "Jordan Avery")
+  shows the 4-paragraph structure: hook + credibility, a proof story, range/fit, then the mission close.
+-->
+<head>
+<meta charset="utf-8">
+<title>Cover Letter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --charcoal:       #1C1C1C;
+    --text-body:      #2f2f2f;
+    --text-secondary: #666666;
+    --accent:         #505a70;
+    --border:         #E5E5E5;
+    --bg:             #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; -webkit-font-smoothing: antialiased; }
+  @page { size: letter; margin: 0; }
+  body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-body); background: var(--bg); }
+  .topbar { height: 10px; background: var(--accent); width: 100%; }
+  .sheet { padding: 0.75in 0.9in 0.7in 0.9in; }
+  .header { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+  h1 { font-size: 27px; font-weight: 800; color: var(--charcoal); letter-spacing: -0.5px; line-height: 1.05; }
+  .subtitle { font-size: 11px; color: var(--text-secondary); margin-top: 4px; font-weight: 500; }
+  .contact { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--text-secondary); text-align: right; line-height: 1.9; white-space: nowrap; padding-top: 4px; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 16px 0 14px; }
+  .subject { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 2.2px; color: var(--accent); font-weight: 600; margin-bottom: 18px; }
+  .greeting { font-size: 11px; margin-bottom: 12px; }
+  p.body { font-size: 11px; line-height: 1.62; margin-bottom: 12px; text-align: left; }
+  .signoff { font-size: 11px; line-height: 1.7; margin-top: 18px; }
+  .signoff .name { font-weight: 700; color: var(--charcoal); }
+  .signoff .sig-contact { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-secondary); margin-top: 2px; }
+</style>
+</head>
+<body>
+  <div class="topbar"></div>
+  <div class="sheet">
+
+    <div class="header">
+      <div>
+        <h1>Jordan Avery</h1>
+        <div class="subtitle">Senior Product Manager &nbsp;&middot;&nbsp; SaaS / Platform</div>
+      </div>
+      <div class="contact">
+        City, ST<br>
+        (555) 123-4567<br>
+        jordan.avery@email.com
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="subject">Cover Letter &nbsp;&middot;&nbsp; Example Company &nbsp;&middot;&nbsp; Senior Product Manager, Platform</div>
+
+    <div class="greeting">Dear Example Company Hiring Team,</div>
+
+    <p class="body">For the last three years I led the platform product at Northwind, where I took a single-use tool and turned it into a configurable workflow engine now used by 200+ teams. I was the product lead for the rebuild that proved teams would adopt automation if setup took under an hour instead of days. That proof is what moved us upmarket. I want the Senior PM, Platform role because the problem you are solving is the one I have spent my career on: making a hard workflow fast and legible for people who do not have time to fight software.</p>
+
+    <p class="body">I have owned reliability as a product problem, not someone else's checklist. When an error-rate defect was blocking our enterprise rollout, I tracked it to a data-pipeline bottleneck, drove the fix, and cut error rates by roughly 75%, which unblocked two large deals. That is the kind of problem I want to own: one whose root cause runs straight through the system, not just the surface.</p>
+
+    <p class="body">Beyond shipping features, I own the range your role asks for. I run discovery directly with the operations leaders who use the product, and I hold the prioritization line when everything feels urgent. I also know the difference between software people actually use and software they route around by falling back to manual work. That difference is the whole game.</p>
+
+    <p class="body">The deeper reason is the mission. I have watched good teams lose months to tools that should have saved them time, and I want to be on the side that fixes that. The platform you are building is one of the mechanisms that does it. I want to build it.</p>
+
+    <div class="signoff">
+      Kind Regards,<br>
+      <span class="name">Jordan Avery</span>
+      <div class="sig-contact">(555) 123-4567 &nbsp;&middot;&nbsp; jordan.avery@email.com</div>
+    </div>
+
+  </div>
+</body>
+</html>

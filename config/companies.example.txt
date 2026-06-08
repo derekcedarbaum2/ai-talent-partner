@@ -1,0 +1,22 @@
+# Companies to track : EDIT THIS (the /setup skill builds it from your target industries + geographies)
+#
+# One company per line. Two accepted formats:
+#     Name | https://their-careers-or-homepage.com
+#     Name | ats:greenhouse:token      (or ats:lever:token  or  ats:ashby:token)
+#
+# The ats: form is best: it polls the company's free public job-board API every run
+# (accurate titles + real post dates, no scraping). The token is the slug in their
+# board URL: boards.greenhouse.io/anthropic -> anthropic, jobs.lever.co/figma -> figma,
+# jobs.ashbyhq.com/openai -> openai.
+#
+# If you only know the website, paste the homepage and resolve_ats.py will try to
+# auto-detect the board. Companies with no public board are checked via web search.
+#
+# Lines starting with # are ignored. The examples below are real public boards you can
+# delete; the /setup skill will research and generate your real list.
+
+# Example (delete these and add your own):
+# Figma | ats:lever:figma
+# Anthropic | ats:greenhouse:anthropic
+# Ramp | ats:ashby:ramp
+# SomeCo | https://www.someco.com/careers

@@ -1,0 +1,25 @@
+# Your personal config + data never gets committed. Only the .example files ship.
+config/config.json
+config/companies.txt
+config/terms.md
+config/profile.md
+config/accomplishment-bank.md
+
+# Generated artifacts + state
+state/
+data/
+runs.log
+*.out
+*.log
+applications/
+
+# Secrets / auth
+*.tokens.json
+*oauth*.json
+.env
+
+# OS / editor
+.DS_Store
+__pycache__/
+*.pyc
+.venv/

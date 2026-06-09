@@ -3,14 +3,13 @@
 # bracket one model-driven step:
 #   A) poll.py        hit each company's Greenhouse/Lever/Ashby board, filter titles + hard
 #                     filters, write state/candidates.json + state/web_shard.json
-#   B) prompts/finder.md   the model judges candidates, runs the web-search shard for non-ATS
-#                     companies, de-dupes against the tracker, and appends new rows via sheet_io
+#   B) model step     judge candidates, run the web-search shard for non-ATS companies, de-dupe
+#                     against the tracker, append new rows via sheet_io
 #   then: check_live.py --apply (drop dead postings), backfill_dates.py --apply, sort_sheet.py
 #
-# Claude Code path: the model step runs headless via the `claude` CLI below.
-# Portable / Codex path: if `claude` is not installed, phase B is skipped and the prompt is
-#   printed for you to run yourself. Read prompts/finder.md, run it against state/candidates.json
-#   and state/web_shard.json, then append the results through scripts/sheet_io.py. See AGENTS.md.
+# The model step runs through config "agent_command" (default "claude -p"). For Codex or another
+# CLI, set agent_command to your headless invocation; the prompt is piped on stdin. If no headless
+# agent is available, phase B is skipped and the prompt is printed for you to run. See AGENTS.md.
 
 set -uo pipefail
 SCRIPTS="$(cd "$(dirname "$0")" && pwd)"
@@ -18,7 +17,6 @@ ROOT="$(dirname "$SCRIPTS")"
 PY="${PYTHON:-python3}"
 LOG="$ROOT/runs.log"
 
-# Read model + finder prompt path from config.json (falls back to the example pre-setup).
 read_cfg() { "$PY" - "$1" <<'PYEOF'
 import json, os, sys
 root = os.environ["ROOT"]
@@ -30,6 +28,8 @@ PYEOF
 }
 export ROOT
 MODEL="$(read_cfg model)"; MODEL="${MODEL:-sonnet}"
+AGENT_CMD="$(read_cfg agent_command)"; AGENT_CMD="${AGENT_CMD:-claude -p}"
+AGENT_BIN="${AGENT_CMD%% *}"
 PROMPT_FILE="$ROOT/prompts/finder.md"
 
 {
@@ -40,15 +40,17 @@ PROMPT_FILE="$ROOT/prompts/finder.md"
   "$PY" "$SCRIPTS/poll.py"
 
   # Phase B: model judgment + web shard + append.
-  if command -v claude >/dev/null 2>&1 && [ -f "$PROMPT_FILE" ]; then
-    cd "$ROOT"
+  cd "$ROOT"
+  if [ -f "$PROMPT_FILE" ] && [ "$AGENT_BIN" = "claude" ] && command -v claude >/dev/null 2>&1; then
     claude -p "$(cat "$PROMPT_FILE")" \
       --model "$MODEL" \
       --permission-mode acceptEdits \
       --allowedTools "Read WebFetch WebSearch Glob Grep Bash(date:*) Bash(python3:*)" \
       --disallowedTools "Bash(rm:*) Bash(git:*)"
+  elif [ -f "$PROMPT_FILE" ] && [ "$AGENT_BIN" != "claude" ] && command -v "$AGENT_BIN" >/dev/null 2>&1; then
+    cat "$PROMPT_FILE" | $AGENT_CMD
   else
-    echo "claude CLI not found (or prompt missing): skipping the model step."
+    echo "No headless agent available (agent_command=$AGENT_CMD): skipping the model step."
     echo "Run prompts/finder.md yourself against state/candidates.json + state/web_shard.json,"
     echo "then append results through scripts/sheet_io.py. See AGENTS.md."
   fi

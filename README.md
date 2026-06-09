@@ -8,6 +8,12 @@ your formatting. You stay in control; the agent does the grinding.
 This is a "build your own" repo. Clone it, open it with Claude Code or Codex, and run setup.
 It interviews you, builds your config, and stands up the whole loop.
 
+## Demo
+
+Add a screenshot or short gif here: the tracker sheet with a few rows, the "Will I apply?" column,
+and one generated application folder (resume.pdf, cover-letter.pdf, application-questions.md). A picture
+of the sheet plus one packet is the fastest way for a newcomer to understand what they get.
+
 ## The loop
 
 1. A finder runs on a schedule (every ~4 hours). It checks your target companies' job boards,
@@ -77,6 +83,29 @@ That keeps it cheap to run on a schedule.
 - A scheduler: macOS `launchd` (examples included) or Linux `cron`. The schedulers only fire while the
   machine is awake; a missed run just catches up next time, since de-dupe means nothing is lost.
 - Optional: a Google account if you want the Google Sheets backend instead of local CSV/Excel.
+
+## Cost and recommended plans
+
+This runs a real language model on a schedule: the finder several times a day, the generator whenever
+you mark jobs Yes. That is not free. It is strongly recommended that you run this on a flat-rate
+subscription rather than metered API billing, so a busy week does not produce a surprise bill.
+
+Recommended: the 100 dollar per month or 200 dollar per month Claude or Codex plan. On those plans the
+scheduled runs are covered by your subscription, which is the whole point of self-hosting this. If you
+point it at metered per-token API billing instead, watch your usage closely and consider lowering the
+finder frequency, shrinking the company list, or setting the model to a cheaper tier in config.
+
+Tuning levers if cost is a concern: raise the finder cron interval, cut the company list, raise
+`web_shard_count` so fewer web searches run per pass, and keep `model` on the cheaper tier.
+
+## Safety, privacy, and ethics
+
+- Nothing is auto-submitted. The agent writes drafts; you review and send. Read every draft first.
+- Do not mass-spam applications. The point is better-targeted applications, not more of them. Curate the Yes column.
+- Your personal data (accomplishment bank, profile, generated materials) stays in your local workspace and is gitignored. Never commit it.
+- If you use the Google Sheets backend, your OAuth token is a credential. It is gitignored; keep it that way and never paste it anywhere public.
+- Do not run the agent with permission guards disabled. The schedulers use a least-privilege tool allowlist on purpose.
+- The materials are only as truthful as your accomplishment bank. The skills never invent; do not add claims you cannot stand behind.
 
 ## What it does not do
 

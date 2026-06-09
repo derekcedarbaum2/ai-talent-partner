@@ -42,8 +42,10 @@ the source of truth for every resume and cover letter.
 4. sorts the sheet by post date.
 
 The model-driven step (judging + web shard + writing rows) is defined as a plain prompt in
-`prompts/finder.md`. In Claude Code this runs headless via the `claude` CLI; from another agent, run the
-same prompt yourself against the candidate file and append the results through `scripts/sheet_io.py`.
+`prompts/finder.md`. The runner invokes it through the config key `agent_command` (default `claude -p`).
+For Codex or another CLI, set `agent_command` to your headless invocation and the prompt is piped to it on
+stdin. If your tool has no headless mode, leave the schedulers off and run the prompt yourself against the
+candidate files, then append results through `scripts/sheet_io.py`.
 
 ## The generator (runs a few times a day)
 `scripts/run_apply.sh` is the entry point. It:

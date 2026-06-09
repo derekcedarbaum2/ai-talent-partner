@@ -28,6 +28,16 @@
   "model": "sonnet",
   "_model_note": "Model for the headless generation passes. sonnet is the cost-sane default.",
 
+  "agent_command": "claude -p",
+  "_agent_command_note": "How the schedulers invoke a headless agent for the model step. 'claude -p' for Claude Code. Codex or another CLI: set the command that runs a prompt headlessly (it receives the prompt on argv or stdin per your CLI). If your agent has no headless mode, leave the schedulers off and run the flows interactively; see AGENTS.md.",
+
+  "render": {
+    "engine": "chrome",
+    "_engine_note": "How tailored HTML is turned into PDF. 'chrome' uses headless Chrome/Chromium (auto-detected). 'none' keeps HTML/markdown only and skips PDF.",
+    "chrome_path": null,
+    "_chrome_path_note": "Optional explicit path to a Chrome/Chromium binary. null = auto-detect."
+  },
+
   "finder_schedule": "17 */4 * * *",
   "_finder_schedule_note": "Cron expression for the job-finder. Default: every 4 hours at :17.",
   "apply_schedule": "7 9,14,19 * * *",

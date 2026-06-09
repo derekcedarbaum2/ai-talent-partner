@@ -24,13 +24,30 @@ CTX = C.ssl_ctx()
 UA = C.UA
 
 
-def fetch(url, timeout=8):
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": UA})
-        with urllib.request.urlopen(req, timeout=timeout, context=CTX) as r:
-            return r.status, r.read(400000).decode("utf-8", "ignore")
-    except Exception:
-        return None, ""
+def fetch(url, timeout=8, retries=3):
+    # Backs off on rate limiting (429) and transient 503s so bulk probing across many companies
+    # does not get the run throttled. Other errors return (None, "") as before.
+    import time, urllib.error
+    delay = 1.0
+    for attempt in range(retries + 1):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": UA})
+            with urllib.request.urlopen(req, timeout=timeout, context=CTX) as r:
+                return r.status, r.read(400000).decode("utf-8", "ignore")
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 503) and attempt < retries:
+                ra = e.headers.get("Retry-After")
+                try:
+                    wait = float(ra) if ra else delay
+                except ValueError:
+                    wait = delay
+                time.sleep(min(wait, 30.0))
+                delay *= 2
+                continue
+            return e.code, ""
+        except Exception:
+            return None, ""
+    return None, ""
 
 
 def token_candidates(name, dom):
@@ -133,7 +150,7 @@ def main():
         limit = int(sys.argv[sys.argv.index("--limit") + 1])
         comps = comps[:limit]
     out = [None] * len(comps)
-    with concurrent.futures.ThreadPoolExecutor(max_workers=16) as ex:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as ex:
         futs = {ex.submit(resolve, c): i for i, c in enumerate(comps)}
         for f in concurrent.futures.as_completed(futs):
             out[futs[f]] = f.result()

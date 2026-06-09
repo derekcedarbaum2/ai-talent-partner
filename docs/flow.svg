@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" font-family="-apple-system, Segoe UI, Roboto, sans-serif">
+  <rect x="0" y="0" width="960" height="320" fill="#FBFAF7"/>
+  <text x="40" y="44" font-family="Georgia, 'Times New Roman', serif" font-size="26" font-weight="700" fill="#1C1C1C">How it works</text>
+  <text x="40" y="70" font-size="13" fill="#5b5b5b">The finder fills your sheet. You mark "Yes". The generator writes your materials. You review and send.</text>
+
+  <!-- arrows between cards -->
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#505a70"/>
+    </marker>
+  </defs>
+  <g stroke="#505a70" stroke-width="1.6" marker-end="url(#arr)">
+    <line x1="212" y1="178" x2="236" y2="178"/>
+    <line x1="408" y1="178" x2="432" y2="178"/>
+    <line x1="604" y1="178" x2="628" y2="178"/>
+    <line x1="800" y1="178" x2="824" y2="178"/>
+  </g>
+
+  <!-- 01 Sources -->
+  <g>
+    <rect x="40" y="100" width="172" height="156" rx="6" fill="#F4F5F7" stroke="#E2E2E0"/>
+    <rect x="40" y="100" width="3" height="156" fill="#505a70"/>
+    <text x="58" y="128" font-family="monospace" font-size="10.5" letter-spacing="1.5" fill="#505a70">01 / SOURCES</text>
+    <text x="58" y="156" font-size="14.5" font-weight="700" fill="#1C1C1C">Your companies</text>
+    <text x="58" y="182" font-size="11.5" fill="#555">Target company list</text>
+    <text x="58" y="200" font-size="11.5" fill="#555">plus your match</text>
+    <text x="58" y="218" font-size="11.5" fill="#555">titles and filters.</text>
+  </g>
+
+  <!-- 02 Finder -->
+  <g>
+    <rect x="236" y="100" width="172" height="156" rx="6" fill="#F4F5F7" stroke="#E2E2E0"/>
+    <rect x="236" y="100" width="3" height="156" fill="#505a70"/>
+    <text x="254" y="128" font-family="monospace" font-size="10.5" letter-spacing="1.5" fill="#505a70">02 / FINDER</text>
+    <text x="254" y="156" font-size="14.5" font-weight="700" fill="#1C1C1C">Every 4 hours</text>
+    <text x="254" y="182" font-size="11.5" fill="#555">Polls ATS boards,</text>
+    <text x="254" y="200" font-size="11.5" fill="#555">filters, de-dupes,</text>
+    <text x="254" y="218" font-size="11.5" fill="#555">drops dead links.</text>
+  </g>
+
+  <!-- 03 Your sheet (the human step) -->
+  <g>
+    <rect x="432" y="100" width="172" height="156" rx="6" fill="#EFF3F4" stroke="#3A6B8C"/>
+    <rect x="432" y="100" width="3" height="156" fill="#3A6B8C"/>
+    <text x="450" y="128" font-family="monospace" font-size="10.5" letter-spacing="1.5" fill="#3A6B8C">03 / YOUR SHEET</text>
+    <text x="450" y="156" font-size="14.5" font-weight="700" fill="#1C1C1C">You mark "Yes"</text>
+    <text x="450" y="182" font-size="11.5" fill="#555">Skim the new rows.</text>
+    <text x="450" y="200" font-size="11.5" fill="#555">Mark the jobs you</text>
+    <text x="450" y="218" font-size="11.5" fill="#555">actually want.</text>
+    <text x="450" y="242" font-family="monospace" font-size="9" letter-spacing="1" fill="#3A6B8C">THE ONLY PART YOU TOUCH</text>
+  </g>
+
+  <!-- 04 Generator -->
+  <g>
+    <rect x="628" y="100" width="172" height="156" rx="6" fill="#F4F5F7" stroke="#E2E2E0"/>
+    <rect x="628" y="100" width="3" height="156" fill="#505a70"/>
+    <text x="646" y="128" font-family="monospace" font-size="10.5" letter-spacing="1.5" fill="#505a70">04 / GENERATOR</text>
+    <text x="646" y="156" font-size="14.5" font-weight="700" fill="#1C1C1C">A few times a day</text>
+    <text x="646" y="182" font-size="11.5" fill="#555">Tailored resume,</text>
+    <text x="646" y="200" font-size="11.5" fill="#555">cover letter, and</text>
+    <text x="646" y="218" font-size="11.5" fill="#555">question answers.</text>
+  </g>
+
+  <!-- 05 Packet -->
+  <g>
+    <rect x="824" y="100" width="136" height="156" rx="6" fill="#F4F5F7" stroke="#E2E2E0"/>
+    <rect x="824" y="100" width="3" height="156" fill="#505a70"/>
+    <text x="842" y="128" font-family="monospace" font-size="10.5" letter-spacing="1.5" fill="#505a70">05 / PACKET</text>
+    <text x="842" y="156" font-size="14.5" font-weight="700" fill="#1C1C1C">Ready to send</text>
+    <text x="842" y="182" font-size="11.5" fill="#555">Tailored PDFs,</text>
+    <text x="842" y="200" font-size="11.5" fill="#555">one folder per</text>
+    <text x="842" y="218" font-size="11.5" fill="#555">job. You review.</text>
+  </g>
+
+  <text x="40" y="296" font-family="monospace" font-size="9.5" letter-spacing="1" fill="#8a8a86">85% DETERMINISTIC PYTHON  .  THIN LLM FOR JUDGMENT AND WRITING  .  NOTHING AUTO-SUBMITTED</text>
+</svg>

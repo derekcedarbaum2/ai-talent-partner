@@ -5,6 +5,8 @@ keeps them in a spreadsheet you curate, and for any job you mark "Yes" it writes
 resume, a tailored cover letter, and answers to the posting's real questions, in your voice and
 your formatting. You stay in control; the agent does the grinding.
 
+![How it works: companies to finder to your sheet to generator to a tailored application packet](docs/flow.svg)
+
 This is a "build your own" repo. Clone it, open it with Claude Code or Codex, and run setup.
 It interviews you, builds your config, and stands up the whole loop.
 
@@ -13,7 +15,7 @@ It interviews you, builds your config, and stands up the whole loop.
 This is a clone-and-customize repo, not an npm package, so there is no `npx ai-talent-partner` one-liner. You clone it and drive it with your coding agent:
 
 ```
-git clone https://github.com/YOUR-USERNAME/ai-talent-partner.git
+git clone https://github.com/derekcedarbaum2/ai-talent-partner.git
 cd ai-talent-partner
 # open this folder with Claude Code or Codex, then run:  /setup
 ```
@@ -21,7 +23,7 @@ cd ai-talent-partner
 Want a clean copy with no git history, so you can make it your own private repo? Use degit:
 
 ```
-npx degit YOUR-USERNAME/ai-talent-partner my-job-search
+npx degit derekcedarbaum2/ai-talent-partner my-job-search
 cd my-job-search
 ```
 
@@ -29,9 +31,10 @@ Either way the next step is the same: open the folder with Claude Code or Codex 
 
 ## Demo
 
-Add a screenshot or short gif here: the tracker sheet with a few rows, the "Will I apply?" column,
-and one generated application folder (resume.pdf, cover-letter.pdf, application-questions.md). A picture
-of the sheet plus one packet is the fastest way for a newcomer to understand what they get.
+The diagram above shows the loop. To make it concrete, drop in a screenshot of your own tracker sheet
+(a few rows plus the "Will I apply?" column) and one generated application folder (resume.pdf,
+cover-letter.pdf, application-questions.md). A real sheet plus one packet is the fastest way for a
+newcomer to see what they get.
 
 ## The loop
 

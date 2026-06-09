@@ -13,7 +13,7 @@ Read `state/apply_queue.json`, an array of jobs the user marked "Will I apply? =
 - Prior cover letters for voice: any `cover-letter.md` already under `applications/`, plus `skills/cover-letter/examples/`.
 
 ## For EACH job in the queue
-1. Compute the output folder: `applications/<Company> - <Title>/`. Strip characters illegal in filenames (/ \\ : * ? " < > |) and collapse runs of spaces.
+1. Compute the output folder. First read `config/config.json` and take `applications_dir` (expand a leading `~` to the home directory). The folder is `<applications_dir>/<Company> - <Title>/`. This is usually in the user's workspace, NOT inside the repo, so always resolve it from config; do not write to a bare repo-relative `applications/`. Strip characters illegal in filenames (/ \\ : * ? " < > |), collapse runs of spaces, and create the folder.
 2. Fetch the job description from the job `url` and save it as `jd.md` in that folder (the resume and cover-letter skills both read `jd.md` from this folder).
 3. Spawn THREE pieces, in parallel where the harness supports it (one message, three subagent calls):
 

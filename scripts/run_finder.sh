@@ -45,8 +45,8 @@ PROMPT_FILE="$ROOT/prompts/finder.md"
     claude -p "$(cat "$PROMPT_FILE")" \
       --model "$MODEL" \
       --permission-mode acceptEdits \
-      --allowedTools "Read WebFetch WebSearch Glob Grep Bash(date:*) Bash(python3:*)" \
-      --disallowedTools "Bash(rm:*) Bash(git:*)"
+      --allowedTools "Read Write Edit WebFetch WebSearch Glob Grep Bash(date:*) Bash(python3:*)" \
+      --disallowedTools "Bash(rm:*) Bash(git:*)" </dev/null
   elif [ -f "$PROMPT_FILE" ] && [ "$AGENT_BIN" != "claude" ] && command -v "$AGENT_BIN" >/dev/null 2>&1; then
     cat "$PROMPT_FILE" | $AGENT_CMD
   else

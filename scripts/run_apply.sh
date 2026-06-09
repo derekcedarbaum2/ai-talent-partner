@@ -50,7 +50,7 @@ PROMPT_FILE="$ROOT/prompts/apply.md"
         --model "$MODEL" \
         --permission-mode acceptEdits \
         --allowedTools "Read Write Edit WebFetch WebSearch Glob Grep Task Bash(date:*) Bash(mkdir:*)" \
-        --disallowedTools "Bash(rm:*) Bash(git:*) Bash(curl:*)"
+        --disallowedTools "Bash(rm:*) Bash(git:*) Bash(curl:*)" </dev/null
     elif [ -f "$PROMPT_FILE" ] && [ "$AGENT_BIN" != "claude" ] && command -v "$AGENT_BIN" >/dev/null 2>&1; then
       # Portable path: pipe the prompt to whatever headless agent the user configured.
       cat "$PROMPT_FILE" | $AGENT_CMD

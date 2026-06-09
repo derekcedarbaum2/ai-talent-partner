@@ -13,6 +13,19 @@ You are running an automated, headless job-finder pass for ai-talent-partner. No
 ## Sheet I/O
 All reads, appends, and de-dupe go through `scripts/sheet_io.py`, which abstracts the backend (local CSV or Google Sheets) per `config/config.json`. The sheet has columns A to H: Date Found, Company, Job Title, Location, Posted, Job URL, Source, Will I apply? You only ever write columns A to G; column H is the user's control and stays blank on append.
 
+Use it exactly like this (run from the repo root via the Bash tool):
+
+```
+# existing URLs for de-dupe:
+python3 -c "import sys; sys.path.insert(0,'scripts'); import sheet_io; print('\n'.join(sheet_io.get_existing_urls()))"
+
+# append new rows: write them to state/new_rows.json as a JSON array of 7-element lists
+# (columns A to G; H is left blank automatically), then:
+python3 -c "import sys,json; sys.path.insert(0,'scripts'); import sheet_io; sheet_io.append_rows(json.load(open('state/new_rows.json')))"
+```
+
+Do not edit the CSV or call the Sheets API directly; always go through sheet_io.
+
 ## Steps
 1. Load the dedup set. Read every existing row through `scripts/sheet_io.py` and build a set of existing Job URLs (the Job URL column). New rows must not duplicate these.
 

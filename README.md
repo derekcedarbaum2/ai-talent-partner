@@ -8,6 +8,25 @@ your formatting. You stay in control; the agent does the grinding.
 This is a "build your own" repo. Clone it, open it with Claude Code or Codex, and run setup.
 It interviews you, builds your config, and stands up the whole loop.
 
+## Install
+
+This is a clone-and-customize repo, not an npm package, so there is no `npx ai-talent-partner` one-liner. You clone it and drive it with your coding agent:
+
+```
+git clone https://github.com/YOUR-USERNAME/ai-talent-partner.git
+cd ai-talent-partner
+# open this folder with Claude Code or Codex, then run:  /setup
+```
+
+Want a clean copy with no git history, so you can make it your own private repo? Use degit:
+
+```
+npx degit YOUR-USERNAME/ai-talent-partner my-job-search
+cd my-job-search
+```
+
+Either way the next step is the same: open the folder with Claude Code or Codex and say "set up". See Quickstart below.
+
 ## Demo
 
 Add a screenshot or short gif here: the tracker sheet with a few rows, the "Will I apply?" column,

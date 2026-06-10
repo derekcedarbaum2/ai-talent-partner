@@ -22,9 +22,9 @@ The orchestrator does selection and tailoring because it holds the bank plus the
 ## Pipeline
 
 ### Step 0 : Load
-1. Job title and job description. Standing intake: read `applications/<Company> - <Role>/jd.md`. If the user names an existing application folder, use its `jd.md`. If they paste text or give a URL, scaffold the folder and save `jd.md` first, then proceed. Outputs are written back into this same packet folder, which is shared with `/cover-letter` so one JD drives both.
-2. Accomplishment bank: your about-me.md (the accomplishment bank in your workspace; path = config key accomplishment_bank).
-3. Base resume template: `templates/resume.html`. The HTML is the render source. Preserve its structure and styling; you are filling it, not redesigning it.
+1. Job title and job description. Standing intake: read `<applications_dir>/<Company> - <Role>/jd.md`, where `applications_dir` comes from `config/config.json` (expand a leading `~`); never assume a bare repo-relative `applications/`. If the user names an existing application folder, use its `jd.md`. If they paste text or give a URL, scaffold the folder and save `jd.md` first, then proceed. Outputs are written back into this same packet folder, which is shared with `/cover-letter` so one JD drives both.
+2. Accomplishment bank: your about-me.md (the accomplishment bank in your workspace; path = config key accomplishment_bank). Gate: if the bank is missing or has no accomplishment entries, STOP and tell the user to run /accomplishment-interview first. Never fabricate a bank.
+3. Tailoring base: the workspace `master-resume.html` (built by the positioning skill; lives in the workspace, config key workspace_root). This superset resume is what you trim and tailor per job. Only if it does not exist, fall back to `templates/resume.html` plus the bank as the base. Either way the HTML is the render source: preserve its structure and styling; you are filling it, not redesigning it.
 4. Personas: see Step 4. Use whatever reader-persona reference your harness provides, or assemble the default panel below from the JD itself.
 5. Rules: `references/ats-rules.md`, `references/resume-writing-rules.md`.
 
@@ -37,23 +37,23 @@ If the JD needs a fact the bank flags as open (for example a number), or positio
 ### Step 3 : Tailor
 - Headline: set it to the exact job title from the posting.
 - Summary: rewrite the "About" to foreground the JD's core competencies, truthfully, in the user's voice.
-- Bullet selection: choose the highest-relevance bank entries per competency. Cut weak-fit bullets to hold one page. Order each role's bullets by JD relevance, strongest first.
+- Bullet selection: starting from the base's superset, keep the highest-relevance bullets per competency (each traces to a bank entry). Cut weak-fit bullets to hold one page. Order each role's bullets by JD relevance, strongest first.
 - Keyword alignment: weave must-have JD terms into bullets where truthful, mirroring the JD's words for the same thing the user actually did. Reorder the Skills section to surface JD-matched skills first.
-- Edit a copy of `templates/resume.html`. Keep the single-column, ATS-safe structure and the white background.
+- Edit a copy of the base from Step 0.3 (`master-resume.html`, or the template fallback). Keep the single-column, ATS-safe structure and the white background.
 - Run the em-dash, AI-tells, and one-page sweep.
 
 ### Step 4 : Panel (parallel, sandboxed) plus ATS check
-Spawn the 3 personas in one message. Default panel: a recruiter or ATS screen, a technical-leader archetype (overclaim and credibility detector), and a product-or-domain-craft archetype (outcome versus activity). Borrow recognizable industry standards for the lens diversity. Each returns a verdict, a scorecard, and top fixes. Separately, run a mechanical ATS keyword-coverage check: list the JD's must-have terms and mark whether each appears truthfully on the resume.
+Spawn the 3 personas in one message. Default panel: a recruiter or ATS screen, a technical-leader archetype (overclaim and credibility detector), and a product-or-domain-craft archetype (outcome versus activity). Borrow recognizable industry standards for the lens diversity. Each returns a verdict, a scorecard, and top fixes. If you cannot spawn subagents, run a single condensed adversarial self-review against the persona criteria, one round. Separately, run a mechanical ATS keyword-coverage check: list the JD's must-have terms and mark whether each appears truthfully on the resume.
 
 ### Step 5 : Synthesize, fix, re-panel
 Apply fixes where two or more personas agree. Single-persona flags are judgment calls. Fixes that need a fact you lack go back to the user; never invent. Re-panel if a convergent blocker remains, 3 rounds maximum.
 
 ### Step 6 : Diff-approval gate (MANDATORY, no PDF before this)
-Show the user a clear before-to-after diff: every change versus the base, grouped (headline, summary, reordered bullets, rephrased bullets, dropped bullets, skills), each with a one-line why and the bank entry it traces to. Include a truthfulness attestation: every bullet traces to the bank, nothing invented. Wait for explicit approval, then apply any edits the user asks for. In a headless run with no human, skip the wait but still emit the diff and attestation to the output folder, and mark the file an auto-generated draft for review.
+Show the user a clear before-to-after diff: every change versus the base from Step 0.3 (`master-resume.html`, or the template fallback), grouped (headline, summary, reordered bullets, rephrased bullets, dropped bullets, skills), each with a one-line why and the bank entry it traces to. Include a truthfulness attestation: every bullet traces to the bank, nothing invented. Wait for explicit approval, then apply any edits the user asks for. In a headless run with no human, skip the wait but still emit the diff and attestation to the output folder, and mark the file an auto-generated draft for review.
 
 ### Step 7 : Render and file
 1. Render the PDF from the tailored HTML via headless Chrome (white background).
-2. File into the application packet folder `applications/<Company> - <Role>/` as `resume.html` plus `resume.pdf` plus `resume.md`, alongside the JD and the cover letter for that job.
+2. File into the application packet folder `<applications_dir>/<Company> - <Role>/` (resolve `applications_dir` from `config/config.json`, expanding `~`) as `resume.html` plus `resume.pdf` plus `resume.md`, alongside the JD and the cover letter for that job.
 3. Report the panel scorecard, the ATS coverage, and the diff summary.
 
 ## Anti-patterns (do not ship)

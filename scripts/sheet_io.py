@@ -15,13 +15,20 @@ Public API (identical for both backends):
 Row numbering is 1-based with the header at row 1 to match Google Sheets' native numbering,
 so the same _rownum values work against either backend.
 
-Google Sheets auth mirrors the original sort_sheet.py: an OAuth refresh-token grant. The token
-file path comes from config["google_token_path"] (default ~/.config/ai-talent-partner/google_token.json)
+Google Sheets auth uses an OAuth refresh-token grant. The token file path comes from
+config["google_token_path"] (default ~/.config/ai-talent-partner/google_token.json)
 and must contain client_id, client_secret, and refresh_token. See docs/SETUP.md.
+
+The CSV backend writes atomically (temp file + os.replace) and serializes read-modify-write
+cycles with an fcntl flock on a lockfile next to the CSV, so concurrent finder/apply runs
+cannot drop rows. POSIX-only (this project targets macOS/Linux).
 """
+import contextlib
 import csv
+import fcntl
 import json
 import os
+import tempfile
 import urllib.parse
 import urllib.request
 
@@ -56,27 +63,52 @@ def _list_to_dict(values, rownum):
 class _CsvBackend:
     def __init__(self, cfg):
         self.path = C.repo_path(C.get(cfg, "csv_path", "./data/jobs.csv"))
+        self.lock_path = self.path + ".lock"
+
+    @contextlib.contextmanager
+    def _locked(self):
+        """Exclusive flock on a lockfile next to the CSV, held across each read-modify-write
+        cycle so concurrent finder/apply runs cannot interleave and drop rows."""
+        os.makedirs(os.path.dirname(self.path), exist_ok=True)
+        with open(self.lock_path, "w") as lf:
+            fcntl.flock(lf, fcntl.LOCK_EX)
+            try:
+                yield
+            finally:
+                fcntl.flock(lf, fcntl.LOCK_UN)
 
     def _ensure(self):
         os.makedirs(os.path.dirname(self.path), exist_ok=True)
         if not os.path.exists(self.path):
-            with open(self.path, "w", newline="") as f:
+            with open(self.path, "w", newline="", encoding="utf-8") as f:
                 csv.writer(f).writerow(HEADER)
 
     def _read_all(self):
         """Return the raw list of data rows (lists), header excluded."""
         self._ensure()
-        with open(self.path, newline="") as f:
+        with open(self.path, newline="", encoding="utf-8") as f:
             rows = list(csv.reader(f))
         return rows[1:] if rows else []
 
     def _write_all(self, data_rows):
+        """Atomic rewrite: write a temp file in the same directory, then os.replace() it over
+        the CSV so readers never see a partially written file."""
         self._ensure()
-        with open(self.path, "w", newline="") as f:
-            w = csv.writer(f)
-            w.writerow(HEADER)
-            for r in data_rows:
-                w.writerow((list(r) + [""] * N)[:N])
+        d = os.path.dirname(self.path) or "."
+        fd, tmp = tempfile.mkstemp(prefix=os.path.basename(self.path) + ".", suffix=".tmp", dir=d)
+        try:
+            with os.fdopen(fd, "w", newline="", encoding="utf-8") as f:
+                w = csv.writer(f)
+                w.writerow(HEADER)
+                for r in data_rows:
+                    w.writerow((list(r) + [""] * N)[:N])
+            os.replace(tmp, self.path)
+        except BaseException:
+            try:
+                os.remove(tmp)
+            except OSError:
+                pass
+            raise
 
     def read_rows(self):
         return [_list_to_dict(r, i + 2) for i, r in enumerate(self._read_all())]
@@ -93,45 +125,49 @@ class _CsvBackend:
     def append_rows(self, rows):
         if not rows:
             return
-        self._ensure()
-        with open(self.path, "a", newline="") as f:
-            w = csv.writer(f)
-            for r in rows:
-                w.writerow(_row_to_list(r))
+        with self._locked():
+            self._ensure()
+            with open(self.path, "a", newline="", encoding="utf-8") as f:
+                w = csv.writer(f)
+                for r in rows:
+                    w.writerow(_row_to_list(r))
 
     def update_cells(self, updates):
         if not updates:
             return
-        data = self._read_all()
-        for up in updates:
-            idx = up["rownum"] - 2     # rownum 2 -> data index 0
-            col = _COL_IDX[up["col"]] if isinstance(up["col"], str) else up["col"]
-            if 0 <= idx < len(data):
-                row = (list(data[idx]) + [""] * N)[:N]
-                row[col] = str(up["value"])
-                data[idx] = row
-        self._write_all(data)
+        with self._locked():
+            data = self._read_all()
+            for up in updates:
+                idx = up["rownum"] - 2     # rownum 2 -> data index 0
+                col = _COL_IDX[up["col"]] if isinstance(up["col"], str) else up["col"]
+                if 0 <= idx < len(data):
+                    row = (list(data[idx]) + [""] * N)[:N]
+                    row[col] = str(up["value"])
+                    data[idx] = row
+            self._write_all(data)
 
     def delete_rows(self, rownums):
         if not rownums:
             return
-        drop = {rn - 2 for rn in rownums}
-        data = [r for i, r in enumerate(self._read_all()) if i not in drop]
-        self._write_all(data)
+        with self._locked():
+            drop = {rn - 2 for rn in rownums}
+            data = [r for i, r in enumerate(self._read_all()) if i not in drop]
+            self._write_all(data)
 
     def sort_by_posted(self):
-        data = self._read_all()
         pi = _COL_IDX["Posted"]
 
         def key(r):
             r = (list(r) + [""] * N)[:N]
             return r[pi].strip()
 
-        # Newest first; blank Posted sorts to the bottom (empty string sorts last under reverse).
-        with_date = [r for r in data if key(r)]
-        without = [r for r in data if not key(r)]
-        with_date.sort(key=key, reverse=True)
-        self._write_all(with_date + without)
+        with self._locked():
+            data = self._read_all()
+            # Newest first; blank Posted sorts to the bottom (empty string sorts last under reverse).
+            with_date = [r for r in data if key(r)]
+            without = [r for r in data if not key(r)]
+            with_date.sort(key=key, reverse=True)
+            self._write_all(with_date + without)
 
 
 # --------------------------------------------------------------------------------------------
@@ -139,7 +175,7 @@ class _CsvBackend:
 # --------------------------------------------------------------------------------------------
 class _GoogleSheetsBackend:
     RANGE = "Sheet1!A2:H"
-    GID = 0
+    TAB = "Sheet1"
 
     def __init__(self, cfg):
         self.sheet_id = C.get(cfg, "google_sheet_id")
@@ -148,6 +184,7 @@ class _GoogleSheetsBackend:
         self.token_path = C.repo_path(
             C.get(cfg, "google_token_path", "~/.config/ai-talent-partner/google_token.json"))
         self._at = None
+        self._gid_cache = None
 
     def _access_token(self):
         if self._at:
@@ -179,6 +216,23 @@ class _GoogleSheetsBackend:
             url, method=method, headers=headers,
             data=json.dumps(body).encode() if body is not None else None)
         return json.load(urllib.request.urlopen(req, timeout=60))
+
+    def _gid(self):
+        """Resolve (and cache) the sheetId of the tab titled Sheet1. Values calls address the
+        tab by name, but batchUpdate (delete/sort) needs the numeric sheetId, which is NOT
+        always 0 -- assuming 0 would hit the wrong tab."""
+        if self._gid_cache is None:
+            meta = self._api("GET", self._base() + "?fields=sheets(properties(sheetId,title))")
+            for sh in meta.get("sheets", []):
+                props = sh.get("properties", {})
+                if props.get("title") == self.TAB:
+                    self._gid_cache = props.get("sheetId")
+                    break
+            if self._gid_cache is None:
+                raise RuntimeError(
+                    f"no tab titled {self.TAB!r} in spreadsheet {self.sheet_id}; the engine "
+                    f"reads and writes the tab named {self.TAB} -- rename your tab or add one")
+        return self._gid_cache
 
     def _values(self):
         url = self._base() + "/values/" + urllib.parse.quote(self.RANGE) + "?majorDimension=ROWS"
@@ -221,7 +275,8 @@ class _GoogleSheetsBackend:
         if not rownums:
             return
         # Delete descending so earlier indices stay valid. rownum is 1-based; API is 0-based.
-        reqs = [{"deleteDimension": {"range": {"sheetId": self.GID, "dimension": "ROWS",
+        gid = self._gid()
+        reqs = [{"deleteDimension": {"range": {"sheetId": gid, "dimension": "ROWS",
                  "startIndex": rn - 1, "endIndex": rn}}} for rn in sorted(rownums, reverse=True)]
         self._api("POST", self._base() + ":batchUpdate", {"requests": reqs})
 
@@ -235,7 +290,7 @@ class _GoogleSheetsBackend:
         if n <= 1:
             return
         body = {"requests": [{"sortRange": {
-            "range": {"sheetId": self.GID, "startRowIndex": 1, "endRowIndex": n,
+            "range": {"sheetId": self._gid(), "startRowIndex": 1, "endRowIndex": n,
                       "startColumnIndex": 0, "endColumnIndex": N},
             "sortSpecs": [{"dimensionIndex": _COL_IDX["Posted"], "sortOrder": "DESCENDING"}],
         }}]}

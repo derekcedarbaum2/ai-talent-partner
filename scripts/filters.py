@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Config-driven hard filters. Generic implementations of the original poll.py filters, with
-every threshold read from config.json's "filters" block instead of being hardcoded:
+"""Config-driven hard filters. Every threshold is read from config.json's "filters" block,
+nothing is hardcoded:
 
     us_only                          -> is_international gate
     experience_ceiling_years/field   -> years_excluded (primary rule)
@@ -47,7 +47,10 @@ def is_international(loc, cfg):
     if not loc:
         return False
     low = loc.lower()
-    has_us = any(re.search(r'\b' + c + r'\b', loc) for c in _US_CODES) or any(w in low for w in _US_WORDS)
+    has_us = (any(re.search(r'\b' + c + r'\b', loc) for c in _US_CODES)
+              or any(w in low for w in _US_WORDS)
+              or re.search(r'\bUS\b', loc) is not None          # bare "US" token, case-sensitive
+              or re.search(r'\bU\.S\.?(?=\W|$)', loc) is not None)
     has_foreign = any(re.search(r'\b' + re.escape(x.strip()) + r'\b', low) for x in _FOREIGN)
     return has_foreign and not has_us
 
@@ -88,10 +91,10 @@ def salary_excluded(raw, cfg):
     floor = int(floor)
     t = re.sub(r'<[^>]+>', ' ', _html.unescape(raw or '')).lower()
     amounts = []
-    for m in re.finditer(r'\$\s?(\d{3}(?:,\d{3})+)', t):       # $180,000 / $1,200,000
+    for m in re.finditer(r'\$\s?(\d{1,3}(?:,\d{3})+)', t):     # $85,000 / $180,000 / $1,200,000
         amounts.append(int(m.group(1).replace(",", "")))
-    for m in re.finditer(r'\$\s?(\d{2,3})\s?[k]\b', t):        # $180k
-        amounts.append(int(m.group(1)) * 1000)
+    for m in re.finditer(r'\$\s?(\d{2,3}(?:\.\d)?)\s?k\b', t):  # $180k / $92.5k (t is lowercased)
+        amounts.append(int(float(m.group(1)) * 1000))
     plausible = [a for a in amounts if 40_000 <= a <= 1_000_000]
     if plausible and max(plausible) < floor:
         return f"salary<{floor//1000}k(${max(plausible):,})"

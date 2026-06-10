@@ -8,17 +8,19 @@ shell even for expired jobs:
   - Workday: the CXS JSON API 404s on dead jobs even though the page is a 200 shell.
   - other (custom): plain HTTP GET, dead only on explicit 404/410, ambiguous -> keep.
 
-Run with --apply to delete; default is a dry-run report. Deterministic, no LLM. Reads and
-deletes through scripts/sheet_io.py, so it works against either the CSV or Google Sheets backend.
-This liveness logic is the engine's crown jewel; it is preserved verbatim in spirit from the
-original.
+Run with --apply to delete; default is a dry-run report. Before deleting, removed rows are
+tombstoned (full row data plus a "removed" date) to state/removed.json. Deterministic, no LLM.
+Reads and deletes through scripts/sheet_io.py, so it works against either the CSV or Google
+Sheets backend. Liveness is the hardest-won logic in the engine; change it carefully.
 """
 import concurrent.futures
 import json
+import os
 import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+from datetime import datetime, timezone
 
 import config_lib as C
 import companies_lib
@@ -102,10 +104,15 @@ def workday_live(url):
     host = p.netloc
     tenant = host.split(".")[0]
     parts = [x for x in p.path.split("/") if x]
-    if "job" not in parts or not parts:
+    if "job" not in parts:
         return None
-    site = parts[0]
-    tail = "/".join(parts[parts.index("job"):])
+    # The site is the path segment immediately before "job". Locale-prefixed URLs
+    # (/en-US/External/job/...) put the locale first, so taking parts[0] would 404 the probe.
+    ji = parts.index("job")
+    if ji == 0:
+        return None
+    site = parts[ji - 1]
+    tail = "/".join(parts[ji:])
     st = api_status(f"https://{host}/wday/cxs/{tenant}/{site}/{tail}")
     if st == 404:
         return False
@@ -115,23 +122,14 @@ def workday_live(url):
 
 
 def http_live(url):
-    """Custom pages: dead only on explicit 404/410; ambiguous -> keep (True)."""
+    """Custom pages: dead only on explicit 404/410; ambiguous -> keep (True).
+    urllib follows redirects itself, so a final 200 lands in the success path."""
     try:
-        cur = url
-        for _ in range(5):
-            try:
-                urllib.request.urlopen(urllib.request.Request(cur, headers={"User-Agent": UA}),
-                                       timeout=12, context=CTX)
-                return True
-            except urllib.error.HTTPError as e:
-                if e.code in (301, 302, 303, 307, 308):
-                    loc = e.headers.get("Location")
-                    if not loc:
-                        return True
-                    cur = urllib.parse.urljoin(cur, loc)
-                    continue
-                return False if e.code in (404, 410) else True
+        urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}),
+                               timeout=12, context=CTX)
         return True
+    except urllib.error.HTTPError as e:
+        return False if e.code in (404, 410) else True
     except Exception:
         return True
 
@@ -164,8 +162,8 @@ def is_dead(company, url):
         if live is False:
             return True
         listed = ashby_listed(tok)                 # GraphQL inconclusive -> board listing
-        if listed and jid.lower() in listed:
-            return False
+        if listed is not None:                     # fetched OK (an empty board is a real answer)
+            return jid.lower() not in listed
         return False                               # truly can't tell -> keep (don't false-delete)
     if "myworkdayjobs.com" in url:                 # Workday: page is a 200 shell; CXS API is authoritative
         live = workday_live(url)
@@ -203,8 +201,29 @@ def main():
         print(f"  row {rownum}: {company} - {title}")
 
     if apply and dead:
+        # Tombstone the removed rows (full row data + removal date) before deleting, so a bad
+        # liveness verdict is recoverable from state/removed.json.
+        by_rownum = {r["_rownum"]: r for r in rows}
+        removed_path = os.path.join(C.REPO_ROOT, "state", "removed.json")
+        try:
+            with open(removed_path, encoding="utf-8") as f:
+                tomb = json.load(f)
+            if not isinstance(tomb, list):
+                tomb = []
+        except Exception:
+            tomb = []
+        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        for rn, *_ in dead:
+            entry = dict(by_rownum.get(rn) or {})
+            entry.pop("_rownum", None)
+            entry["removed"] = today
+            tomb.append(entry)
+        os.makedirs(os.path.dirname(removed_path), exist_ok=True)
+        with open(removed_path, "w", encoding="utf-8") as f:
+            json.dump(tomb, f, indent=2)
         sheet_io.delete_rows([rn for rn, *_ in dead])
-        print(f"\nDELETED {len(dead)} dead rows.")
+        print(f"\nDELETED {len(dead)} dead rows (tombstoned to state/removed.json, "
+              f"{len(tomb)} entries total).")
     elif not apply:
         print("\n(dry run - pass --apply to delete)")
 

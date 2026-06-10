@@ -8,7 +8,7 @@ A tailored resume has two first readers: an ATS parser and a recruiter's 6-secon
 - No text inside images. All content as real text. A PDF rendered from HTML is fine; an image-only PDF is not.
 - Keyword match to the JD. Parsers and recruiters search for the JD's exact terms. If the JD says "capability-based planning" and the candidate did that, use that phrase. Mirror the JD's vocabulary for the same real thing. Never claim a skill the candidate lacks.
 - Spell out then abbreviate on first use for key terms when space allows, for example "User Acceptance Testing (UAT)".
-- File naming: `<Candidate Name> - <Role> - <Company>.pdf`. Clean and searchable.
+- File naming: inside the packet folder the file is always `resume.pdf`; the pipeline depends on that name. If exporting a standalone copy outside the packet, name it `<Candidate Name> - <Role> - <Company>.pdf`.
 - Dates in a consistent format the parser can read, for example "March 2020 to June 2024".
 
 ## Recruiter 6-second skim

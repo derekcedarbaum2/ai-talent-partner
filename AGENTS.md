@@ -7,8 +7,9 @@ user the same questions inline and wait for answers.
 
 ## Orientation
 Read `README.md` first, then `config/config.example.json` and the `config/*.example.md` files. The user's
-real config lives in `config/config.json`, `config/companies.txt`, `config/terms.md`, `config/profile.md`,
-and your about-me.md (the accomplishment bank in your workspace; path = config key accomplishment_bank). Those are gitignored and personal; the `.example` versions are the schema.
+real config lives in `config/config.json`, `config/companies.txt`, and `config/terms.md`; their profile.md
+(config key `profile_file`) and about-me.md (the accomplishment bank; config key `accomplishment_bank`)
+live in the workspace, not the repo. All of it is gitignored and personal; the `.example` versions are the schema.
 
 ## The workspace (create this during setup)
 This repo is code. The user's personal data lives in a separate workspace folder they choose. During
@@ -35,11 +36,13 @@ spreadsheet (Google Sheets or local CSV), and how to install the schedulers. Ste
 the source of truth for every resume and cover letter.
 
 ## The finder (runs on a schedule)
-`scripts/run_finder.sh` is the entry point. It:
-1. runs `scripts/poll.py` (hits each company's Greenhouse/Lever/Ashby board, filters by `config/terms.md`, writes candidates),
+`scripts/run_finder.sh` is the entry point. (Board detection happens earlier: `scripts/resolve_ats.py`
+runs at setup and caches to `state/companies.resolved.json`; re-run it when companies are added.) It:
+1. runs `scripts/poll.py` (hits each company's Greenhouse/Lever/Ashby board, filters by `config/terms.md` and the config.json `filters` block, drops already-tracked URLs, writes candidates),
 2. runs the generation pass that judges candidates, does the web-search shard for non-ATS companies, de-dupes against the sheet, and appends new rows,
-3. runs `scripts/check_live.py` to drop closed/dead postings,
-4. sorts the sheet by post date.
+3. runs `scripts/check_live.py` to drop closed/dead postings (removed rows are tombstoned to `state/removed.json` first),
+4. runs `scripts/backfill_dates.py` to fill missing post dates,
+5. sorts the sheet by post date.
 
 The model-driven step (judging + web shard + writing rows) is defined as a plain prompt in
 `prompts/finder.md`. The runner invokes it through the config key `agent_command` (default `claude -p`).
@@ -55,11 +58,12 @@ candidate files, then append results through `scripts/sheet_io.py`.
    substantive free-text questions. Each writing pass runs the `skills/sense-of-style` check at least once.
 3. runs `scripts/apply_mark.py` to mark fully-generated jobs done.
 
-Output goes to `applications/<Company> - <Role>/`. Nothing is submitted.
+Output goes to `<workspace applications_dir>/<Company> - <Role>/`. Nothing is submitted.
 
 ## The Yes/No loop
 Tell the user: the finder fills the sheet; they type "Yes" in the "Will I apply?" column for jobs they want;
-the generator writes materials for those. It only generates once per job. This is the core workflow.
+the generator writes materials for those. It only generates once per job, tracked by URL in
+`state/generated.json`. This is the core workflow.
 
 ## Sheet I/O
 `scripts/sheet_io.py` abstracts the backend. With `backend: csv` it reads/writes the workspace `jobs.csv` (config `csv_path`). With

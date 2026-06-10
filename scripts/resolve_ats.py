@@ -15,6 +15,7 @@ import json
 import os
 import re
 import sys
+import urllib.parse
 import urllib.request
 
 import config_lib as C
@@ -84,11 +85,13 @@ def lever_ok(tok):
 
 
 def ashby_ok(tok):
-    s, b = fetch(f"https://api.ashbyhq.com/posting-api/job-board/{tok}?includeCompensation=false")
+    # Tokens may contain spaces or dots (e.g. "Flock Safety", "acme.io"); quote for the URL.
+    url = f"https://api.ashbyhq.com/posting-api/job-board/{urllib.parse.quote(tok)}?includeCompensation=false"
+    s, b = fetch(url)
     if s == 200 and '"jobs"' in b:
         try:
             if json.loads(b).get("jobs") is not None:
-                return f"https://api.ashbyhq.com/posting-api/job-board/{tok}?includeCompensation=false"
+                return url
         except Exception:
             pass
     return None
@@ -100,7 +103,10 @@ HTML_PATTERNS = [
     ("greenhouse", re.compile(r'(?:boards|job-boards)\.greenhouse\.io/(?:embed/job_board\?for=)?([a-z0-9]+)', re.I)),
     ("greenhouse", re.compile(r'greenhouse\.io/embed/job_board\?for=([a-z0-9]+)', re.I)),
     ("lever",      re.compile(r'jobs\.lever\.co/([a-z0-9\-]+)', re.I)),
-    ("ashby",      re.compile(r'(?:jobs\.ashbyhq\.com|ashbyhq\.com/job-board)/([a-z0-9\-]+)', re.I)),
+    # Ashby tokens may contain URL-encoded spaces (%20) and dots, e.g. "Flock%20Safety" or
+    # "acme.io". Match any run of non-slash URL characters (mirroring ats_lib.parse_ats),
+    # then urldecode, so resolver and parser agree.
+    ("ashby",      re.compile(r'(?:jobs\.ashbyhq\.com|ashbyhq\.com/job-board)/([^/\s"\'<>&?#]+)', re.I)),
 ]
 WORKDAY = re.compile(r'([a-z0-9\-]+)\.(wd\d+)\.myworkdayjobs\.com', re.I)
 VERIFY = {"greenhouse": gh_ok, "lever": lever_ok, "ashby": ashby_ok}
@@ -123,8 +129,10 @@ def resolve(company):
         for prov, pat in HTML_PATTERNS:
             m = pat.search(html)
             if m:
-                tok = m.group(1).lower()
-                if tok in ("embed", "www", "api"):
+                tok = urllib.parse.unquote(m.group(1))
+                if prov != "ashby":
+                    tok = tok.lower()      # ashby tokens can be case-/space-sensitive; keep as-is
+                if tok.lower() in ("embed", "www", "api"):
                     continue
                 api = VERIFY[prov](tok)
                 if api:
@@ -142,18 +150,48 @@ def resolve(company):
     return {**company, "ats": None}
 
 
+def _merge_prior(out, cfg):
+    """Keep previously verified ats entries when this run resolved a company to ats=None
+    (e.g. a transient fetch failure), so a flaky run never clobbers known-good tokens.
+    Returns the number of entries carried over."""
+    cache_path = companies_lib._resolved_cache_path(cfg)
+    if not os.path.exists(cache_path):
+        return 0
+    try:
+        prior = {x["name"].strip().lower(): x.get("ats")
+                 for x in json.load(open(cache_path, encoding="utf-8"))}
+    except Exception:
+        return 0
+    kept = 0
+    for c in out:
+        if not c.get("ats"):
+            old = prior.get(c["name"].strip().lower())
+            if old:
+                c["ats"] = old
+                kept += 1
+    return kept
+
+
 def main():
-    cfg = C.load()
-    comps = companies_lib.load(cfg, use_resolved=False)
     limit = None
     if "--limit" in sys.argv:
-        limit = int(sys.argv[sys.argv.index("--limit") + 1])
+        i = sys.argv.index("--limit")
+        if i + 1 >= len(sys.argv):
+            sys.exit("resolve_ats: --limit requires a number (usage: resolve_ats.py [--limit N])")
+        try:
+            limit = int(sys.argv[i + 1])
+        except ValueError:
+            sys.exit(f"resolve_ats: --limit must be a number, got {sys.argv[i + 1]!r}")
+    cfg = C.load()
+    comps = companies_lib.load(cfg, use_resolved=False)
+    if limit is not None:
         comps = comps[:limit]
     out = [None] * len(comps)
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as ex:
         futs = {ex.submit(resolve, c): i for i, c in enumerate(comps)}
         for f in concurrent.futures.as_completed(futs):
             out[futs[f]] = f.result()
+    kept = 0 if limit else _merge_prior(out, cfg)
     found = [c for c in out if c["ats"] and c["ats"].get("provider") != "workday"]
     workday = [c for c in out if c["ats"] and c["ats"].get("provider") == "workday"]
     none = [c for c in out if not c["ats"]]
@@ -167,7 +205,10 @@ def main():
             print("  +", c["ats"]["provider"], c["ats"]["token"], "<-", c["name"])
     else:
         companies_lib.save_resolved(out, cfg)
-        print("wrote state/companies.resolved.json with ats fields")
+        msg = "wrote state/companies.resolved.json with ats fields"
+        if kept:
+            msg += f" (kept {kept} previously verified entries over null re-resolutions)"
+        print(msg)
 
 
 if __name__ == "__main__":

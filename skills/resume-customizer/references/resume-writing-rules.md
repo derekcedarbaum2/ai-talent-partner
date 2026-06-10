@@ -20,7 +20,7 @@
 - Left-in artifacts like "[add number here]".
 
 ## Voice
-Direct, concrete, technical, no corporate filler. Confident without bragging. A bullet should read like something a sharp operator wrote, not a template. Match the voice and tone captured in `config/profile.md`.
+Direct, concrete, technical, no corporate filler. Confident without bragging. A bullet should read like something a sharp operator wrote, not a template. Match the voice and tone captured in the workspace profile.md (path = config key profile_file).
 
 ## Sensitivity
-Keep classified or proprietary specifics vague: no program names, no classified capability detail. Referencing a current or former employer by name is fine; never reproduce an employer's proprietary material. Honor anything the candidate flagged as sensitive in `config/profile.md`.
+Keep classified or proprietary specifics vague: no program names, no classified capability detail. Referencing a current or former employer by name is fine; never reproduce an employer's proprietary material. Honor anything the candidate flagged as sensitive in the workspace profile.md (config key profile_file).

@@ -22,14 +22,11 @@
   "applications_dir": "~/job-search/applications",
   "_applications_dir_note": "Where generated resume/cover-letter/answers land, one folder per job, inside your workspace.",
 
-  "resume_template": "templates/resume.html",
-  "cover_letter_template": "templates/cover-letter.html",
-
   "model": "sonnet",
   "_model_note": "Model for the headless generation passes. sonnet is the cost-sane default.",
 
   "agent_command": "claude -p",
-  "_agent_command_note": "How the schedulers invoke a headless agent for the model step. 'claude -p' for Claude Code. Codex or another CLI: set the command that runs a prompt headlessly (it receives the prompt on argv or stdin per your CLI). If your agent has no headless mode, leave the schedulers off and run the flows interactively; see AGENTS.md.",
+  "_agent_command_note": "How the schedulers invoke a headless agent for the model step. 'claude -p' for Claude Code (the scripts pass the prompt as an argument to claude -p). Any other CLI: set a command that reads the prompt from stdin; the scripts pipe the prompt file into it. If your agent has no headless mode, leave the schedulers off and run the flows interactively; see AGENTS.md.",
 
   "render": {
     "engine": "chrome",
@@ -38,16 +35,14 @@
     "_chrome_path_note": "Optional explicit path to a Chrome/Chromium binary. null = auto-detect."
   },
 
-  "finder_schedule": "17 */4 * * *",
-  "_finder_schedule_note": "Cron expression for the job-finder. Default: every 4 hours at :17.",
-  "apply_schedule": "7 9,14,19 * * *",
-  "_apply_schedule_note": "Cron for the resume/cover-letter generator. Default: 9:07, 14:07, 19:07.",
-
   "web_shard_count": 24,
   "_web_shard_note": "Non-ATS companies are checked 1/N per run to spread load. Raise N if you add many companies.",
 
   "google_token_path": "~/.config/ai-talent-partner/google_token.json",
   "_google_token_note": "Only used when backend=google_sheets. JSON file holding an OAuth refresh token plus client_id and client_secret. See docs/SETUP.md. Leave as the default unless you store it elsewhere.",
+
+  "insecure_tls": false,
+  "_insecure_tls_note": "TLS certificate verification is ON by default. Set true only if a careers site you poll has a broken cert chain and you accept the risk; it disables verification for those fetches.",
 
   "filters": {
     "_note": "Hard filters applied in scripts/poll.py and re-applied in the generation prompts. Set any value to null to disable that filter.",

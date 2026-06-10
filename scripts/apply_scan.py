@@ -9,12 +9,14 @@ apply_mark.py after its materials are fully generated), so nothing is queued twi
 import json
 import os
 
+import apply_mark
 import config_lib as C
 import sheet_io
 
 
 def main():
     cfg = C.load()
+    apps_dir = C.repo_path(C.get(cfg, "applications_dir", "./applications"))
     state = os.path.join(C.REPO_ROOT, "state")
     os.makedirs(state, exist_ok=True)
     gen_path = os.path.join(state, "generated.json")
@@ -25,9 +27,15 @@ def main():
         apply = (r.get("Will I apply?") or "").strip().lower()
         url = (r.get("Job URL") or "").strip()
         if apply.startswith("y") and url and url not in done:
-            queue.append({"date_found": r.get("Date Found", ""), "company": r.get("Company", ""),
-                          "title": r.get("Job Title", ""), "location": r.get("Location", ""),
-                          "posted": r.get("Posted", ""), "url": url, "source": r.get("Source", "")})
+            company = r.get("Company", "")
+            title = r.get("Job Title", "")
+            # "folder" is the precomputed absolute destination for the generator: same
+            # sanitization as apply_mark.folder_for, so the mark step finds the materials.
+            folder = os.path.abspath(apply_mark.folder_for(apps_dir, company, title))
+            queue.append({"date_found": r.get("Date Found", ""), "company": company,
+                          "title": title, "location": r.get("Location", ""),
+                          "posted": r.get("Posted", ""), "url": url, "source": r.get("Source", ""),
+                          "folder": folder})
 
     json.dump(queue, open(os.path.join(state, "apply_queue.json"), "w"), indent=2)
     print(f"apply-scan: {len(queue)} job(s) marked Yes needing materials "

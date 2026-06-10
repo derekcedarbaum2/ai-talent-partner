@@ -68,7 +68,8 @@ misses real matches; too broad ("Manager") drowns them in noise. Aim for the mid
 Write these into `config/` (the real files, not the `.example` ones):
 
 - The workspace `profile.md` was stubbed in Step 0.5. Capture the raw preferences from the interview into it now (titles, industries, geographies, constraints); the positioning skill in Step 5 rewrites it into a polished narrative. Do not create a second profile in the repo.
-- `config/terms.md`: the title list, exclusions, and the hard filters they chose (location, experience ceiling, salary floor, company special-cases). Mirror the format in `config/terms.example.md`.
+- `config/terms.md`: the title list, exclusions, and a human-readable "Hard filters" section mirroring the filters below. Mirror the format in `config/terms.example.md`. This section is documentation only; the enforced filters live in config.json.
+- The `filters` block in `config/config.json`: this is the single enforced source of hard filters (`scripts/poll.py` reads only this), so write it explicitly from the interview answers. Set `experience_ceiling_years` plus `experience_ceiling_field` from the seniority ceiling (and the secondary years/field pair if they gave a domain floor like "5+ years SaaS", else null both), `salary_floor_usd` from the salary floor (null if none), `us_only` from the geography answer, and `company_location_rules` from any company special-cases. Null out or remove every unused example rule, including the ExampleCorp placeholder; never ship a filter the user did not choose. Write the terms.md "Hard filters" mirror in this same step so the two never drift.
 - `config/companies.txt`: build the list. Starter lists ship in `config/seed-companies/` (defense, robotics, ai). These seed lists are broad on purpose: they serve many professions, not just one. Software engineers, mechanical engineers, hardware engineers, and other roles all hire across these same defense, robotics, and AI companies, so a wide list is a feature, not noise. Do NOT push the user to trim. Tell them the seed lists exist and that they can keep them in full and let the title-match terms plus the hard filters (location, experience ceiling, salary floor) do the work of finding signal, or trim if they prefer a tighter set. Either is fine. Make clear they can add any industry they want. For industries the seed lists do not cover, use web search to find companies in their target industries and geographies, prioritizing actively-hiring firms. For each company, prefer the `ats:provider:token` form by checking for a Greenhouse/Lever/Ashby board; fall back to the homepage URL. Aim for a real starter set (50 to a few hundred). Tell the user the count and that they can edit the file anytime.
 - `about-me.md` (the accomplishment bank, in the workspace): hand off to the accomplishment-interview skill in Step 4. Do not build it inline.
 - `config/config.json`, from `config/config.example.json`, with backend, paths, schedules, and applications_dir set.
@@ -107,7 +108,7 @@ materials read like a person. Do not build these inline; hand off to the skill.
 Tell the user plainly: every few hours the finder adds new matching jobs to their sheet. They open it,
 skim, and in the "Will I apply?" column type Yes for any they want to pursue (blank or No otherwise).
 The next time the generator runs, it produces a tailored resume, cover letter, and answers to the
-posting's substantive questions for every Yes row, into `applications/<Company> - <Role>/`. Review,
+posting's substantive questions for every Yes row, into `<applications_dir>/<Company> - <Role>/` in their workspace. Review,
 finalize, send. Point them at README.md for the same instructions and at `config/` for everything they can tune.
 
 ## Rules

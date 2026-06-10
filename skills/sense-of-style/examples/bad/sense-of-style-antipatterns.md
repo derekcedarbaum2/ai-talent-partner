@@ -24,7 +24,7 @@ Fix: prefer active voice, but passive is valid when the agent is genuinely unimp
 
 What: producing rewrites that sound neutral or academic.
 
-Fix: match the candidate's voice as captured in `config/profile.md`: direct, first-principles, no corporate polish.
+Fix: match the candidate's voice as captured in the workspace profile.md (config key profile_file): direct, first-principles, no corporate polish.
 
 ## 5. Ignoring context
 

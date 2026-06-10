@@ -17,7 +17,7 @@ The setup skill usually passes these in; if not, ask for them. Extract a first-d
 straight from this material. This draft is what you interrogate, so the user reacts instead of recalling cold.
 
 ## Step 2 : Draft entries in the standard shape
-For each accomplishment, draft an entry with these fields:
+Mirror the entry format in `examples/about-me.example.md` exactly. For each accomplishment, draft an entry with these fields:
 
 - title: a short handle for the accomplishment.
 - x: what the user did (the action, their real contribution, "co-" honest if it was a team effort).
@@ -44,7 +44,9 @@ need it. And ask about breadth beyond the obvious one or two roles (side project
 earlier career) if those matter for the user's target roles.
 
 ## Step 4 : Write the bank
-Write your about-me.md (the accomplishment bank in your workspace; path = config key accomplishment_bank). Open with the rules: this is a superset (more than fits on one page,
+Write your about-me.md (the accomplishment bank in your workspace; path = config key accomplishment_bank).
+Mirror `examples/about-me.example.md` exactly: the rules block up top, themed entry groups, the seven-field
+entry shape, then the closing blocks. Open with the rules: this is a superset (more than fits on one page,
 tailoring means selecting and reweighting, never inventing); every entry carries the real contribution and a
 number where one exists; mark estimates as estimates; keep sensitive material vague. Group entries by theme
 (for example a "spine" theme for the user's strongest throughline, then GTM, leadership, technical, AI, and so on).
@@ -52,8 +54,9 @@ End with a "Fixed facts" block (education, contact, clearances, anything that ne
 "Open facts to collect" block listing the numbers still missing, so a future run knows exactly what to chase.
 
 ## Step 5 : Make it re-runnable
-This skill appends over time. On later runs, read the existing bank, add new accomplishments, and resolve
-open facts rather than rewriting from scratch. Encourage the user to re-run it after a notable win.
+This skill appends over time. On later runs, read the existing bank, append new entries in the same
+`examples/about-me.example.md` format, and resolve open facts rather than rewriting from scratch.
+Encourage the user to re-run it after a notable win.
 
 ## Rules
 - Never fabricate accomplishments, titles, dates, or metrics. Everything traces to source material or the user's answers.

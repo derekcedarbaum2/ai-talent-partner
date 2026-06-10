@@ -5,7 +5,7 @@ version: 1.0.0
 allowed-tools: [Read, Write, Edit, Glob, Grep, AskUserQuestion]
 ---
 
-> Voice: read `config/profile.md` for the candidate's voice and tone. This skill enforces Pinker's style principles on top of that voice; they should align, not conflict.
+> Voice: read the workspace profile.md (path = config key profile_file in `config/config.json`) for the candidate's voice and tone. This skill enforces Pinker's style principles on top of that voice; they should align, not conflict.
 >
 > AI-writing tells: before the diagnostic pass, scan the draft against the full catalog of AI-writing tells described in dimension 9 below. Strip any tell on rewrite unless it is genuinely the best tool for that exact sentence. This is a hard rewrite rule. The candidate's writing must never read as machine-generated.
 
@@ -336,7 +336,7 @@ If inline: output the rewrite in the conversation. Do not create a file unless a
 
 Document is already tight: if the overall score is 80 of 90 or higher on the initial pass, report "no rewrite needed" with the diagnostic. Do not manufacture changes.
 
-Voice conflicts with Pinker: if a Pinker principle would soften the candidate's stated voice in `config/profile.md`, keep the voice. The principles serve the voice.
+Voice conflicts with Pinker: if a Pinker principle would soften the candidate's stated voice in the workspace profile.md (config key profile_file), keep the voice. The principles serve the voice.
 
 Technical document with unavoidable jargon: flag curse-of-knowledge for the intended audience only. A doc for engineers can assume engineering terms. A pitch for executives cannot.
 

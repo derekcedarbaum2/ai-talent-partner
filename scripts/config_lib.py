@@ -20,12 +20,16 @@ N_COLS = len(HEADER)
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/124 Safari/537.36"
 
 
-def ssl_ctx():
-    """Permissive SSL context. Careers pages and ATS endpoints occasionally ship broken
-    certificate chains; we only ever GET public job data, never anything sensitive."""
+def ssl_ctx(cfg=None):
+    """TLS context for all engine HTTP. Verified by default. Set "insecure_tls": true in
+    config.json to disable certificate verification for the odd careers site with a broken
+    chain (the engine only ever GETs public job data)."""
+    if cfg is None:
+        cfg = load()
     c = ssl.create_default_context()
-    c.check_hostname = False
-    c.verify_mode = ssl.CERT_NONE
+    if get(cfg, "insecure_tls", False):
+        c.check_hostname = False
+        c.verify_mode = ssl.CERT_NONE
     return c
 
 

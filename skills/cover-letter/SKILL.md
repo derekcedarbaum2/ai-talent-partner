@@ -9,7 +9,7 @@ Write a cover letter as a product with users. The letter has distinct readers (r
 
 ## Operating principles
 
-- Voice is the candidate's. Direct, first-principles, punchy. No corporate tone, no hedging, no AI-writing tells. Load `references/writing-rules.md` and obey it, and read `config/profile.md` for the candidate's stated voice and tone.
+- Voice is the candidate's. Direct, first-principles, punchy. No corporate tone, no hedging, no AI-writing tells. Load `references/writing-rules.md` and obey it, and read the workspace profile.md (path = config key profile_file) for the candidate's stated voice and tone.
 - Hard rule: no em-dashes. Use commas, colons, periods.
 - Specific beats generic, always. Numbers, names, dollar figures, the candidate's actual contribution. A letter that could be sent to any company is a failed letter.
 - Do not fabricate. Every claim traces to the accomplishment bank, a prior letter, or the user's interview answers. When a claim needs a fact you do not have, ask (Step 2); never invent a metric. If the user cannot supply one, describe the mechanism instead of faking a number.
@@ -28,11 +28,11 @@ A sequential pipeline with one parallel fan-out at each review. Why it is built 
 
 ### Step 0 : Load context
 Read, in this order:
-1. The job description. Standing intake: `applications/<Company> - <Role>/jd.md`. If the user names an application whose folder exists, read its `jd.md`. If they paste JD text or give a URL instead, scaffold that folder and save the JD to `jd.md` first (fetch the URL into the file), then proceed. This folder is the packet home: the JD lives here and the finished letter is written back here.
-2. Accomplishment bank (primary fact source): your about-me.md (the accomplishment bank in your workspace; path = config key accomplishment_bank), the canonical superset of the candidate's wins with numbers and their real contribution. Pick the stories most relevant to this JD from here.
+1. The job description. Standing intake: `<applications_dir>/<Company> - <Role>/jd.md`, where `applications_dir` comes from `config/config.json` (expand a leading `~`); never assume a bare repo-relative `applications/`. If the user names an application whose folder exists, read its `jd.md`. If they paste JD text or give a URL instead, scaffold that folder and save the JD to `jd.md` first (fetch the URL into the file), then proceed. This folder is the packet home: the JD lives here and the finished letter is written back here.
+2. Accomplishment bank (primary fact source): your about-me.md (the accomplishment bank in your workspace; path = config key accomplishment_bank), the canonical superset of the candidate's wins with numbers and their real contribution. Gate: if the bank is missing or has no accomplishment entries, STOP and tell the user to run /accomplishment-interview first; never fabricate. Pick the stories most relevant to this JD from here.
 3. Prior cover letters from this skill's `examples/` and from any letters already filed under `applications/`. Read 1 to 3 for voice, structure, and reusable framings.
 4. Personas: see Step 1. Use whatever reader-persona reference your harness provides, or assemble the default panel below from the JD itself.
-5. Best practices and writing rules: `references/best-practices.md` and `references/writing-rules.md`. Candidate voice: `config/profile.md`.
+5. Best practices and writing rules: `references/best-practices.md` and `references/writing-rules.md`. Candidate voice: the workspace profile.md (config key profile_file).
 
 Extract from the JD: the role, the product or team, the company, the 3 to 5 things the JD most wants, the explicit bets (for example "this role bets on AI"), and the company's culture (especially mission-driven shops; note them for the authenticity test).
 
@@ -58,7 +58,7 @@ Write the letter per `references/writing-rules.md`:
 - Run the em-dash and AI-tells self-check before saving.
 
 ### Step 4 : Adversarial panel (parallel, sandboxed), round 1
-Spawn the 3 chosen personas in a single message. Use `references/persona-review-template.md` to build each prompt: full letter verbatim plus the persona's read-priorities plus required structured output (verdict, gut reaction, scorecard 1 to 10, red flags, top 2 to 3 fixes). Tell each to stay in character, be brutally honest, no flattery.
+Spawn the 3 chosen personas in a single message. Use `references/persona-review-template.md` to build each prompt: full letter verbatim plus the persona's read-priorities plus required structured output (verdict, gut reaction, scorecard 1 to 10, red flags, top 2 to 3 fixes). Tell each to stay in character, be brutally honest, no flattery. If you cannot spawn subagents, run a single condensed adversarial self-review against the persona criteria, one round.
 
 ### Step 5 : Synthesize and fix
 Collect the 3 reports. A fix is mandatory when two or more personas flag the same issue. Single-persona flags are judgment calls; apply only if you agree. For fixes needing a fact you lack, return to the user with a tight question; do not invent. Apply fixes with a fresh-writer mindset. Re-run the em-dash and tells check.
@@ -69,7 +69,7 @@ Re-spawn the 3 personas (parallel) on the revised letter. If a convergent (two o
 ### Step 7 : Style pass and finalize
 1. Run the `sense-of-style` skill (or its rubric) on the final text. Target all dimensions at 8 of 10 or higher; fix what is cheap.
 2. Final em-dash and AI-tells sweep.
-3. File the finalized letter into the application packet folder `applications/<Company> - <Role>/` as `cover-letter.md`, alongside the JD and resume for that job. Offer to render a PDF from `templates/cover-letter.html`.
+3. File the finalized letter into the application packet folder `<applications_dir>/<Company> - <Role>/` (resolve `applications_dir` from `config/config.json`, expanding `~`) as `cover-letter.md`, alongside the JD and resume for that job. Offer to render a PDF from `templates/cover-letter.html`.
 4. Drop a copy into this skill's `examples/` as `<company>-<role-slug>.md` and add a line to `examples/README.md` (the growing pattern bank).
 5. Report the final scorecard delta across rounds.
 

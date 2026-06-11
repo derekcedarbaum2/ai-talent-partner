@@ -6,7 +6,7 @@ The seed entry below uses a fictional candidate, "Jordan Avery", to illustrate t
 
 | File | Company | Role | Panel result | Notes |
 |------|---------|------|--------------|-------|
-| `sample-defense-tech-senior-pm.md` | (sample) | Senior Software PM | Illustrative only | Quality-defect story as the spine; mission close in own voice; AI shown as a built tool, not a volume brag. |
+| `sample-defense-tech-senior-pm.md` | (sample) | Senior Software PM | Illustrative only | Quality-defect story as the spine; mission close in own voice; AI shown as a built tool, not a volume brag. 398 words, inside the 250-to-400 hard gate. |
 
 ## Patterns that worked (harvest from the bank)
 - Open with a quantified credential that also names the candidate's contribution ("I was the product lead for the prototype that proved X, and that proof unlocked $120M+").

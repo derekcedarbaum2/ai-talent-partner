@@ -9,7 +9,7 @@ These rules govern the draft and every revision. They are not suggestions.
 4. Run the AI-tells sweep (below) before saving.
 
 ## The candidate's voice
-- Direct, first-principles, punchy. Read `config/profile.md` for the candidate's stated voice and tone, and match it. A cover letter stays professional but keeps the directness.
+- Direct, first-principles, punchy. Read the workspace profile.md (path = config key profile_file) for the candidate's stated voice and tone, and match it. A cover letter stays professional but keeps the directness.
 - Active voice, named agents. Cut filler adverbs. Split long sentences. Apply this up front, not as a polish pass.
 - No corporate tone, no HR-speak, no hedging, no press-release language.
 - Match the candidate's level: technical, not over-explained.

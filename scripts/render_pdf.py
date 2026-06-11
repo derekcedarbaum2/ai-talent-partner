@@ -21,6 +21,7 @@ import os
 import shutil
 import subprocess
 import sys
+from urllib.parse import quote
 
 import config_lib as C
 
@@ -64,7 +65,8 @@ def render_one(chrome, html_path, pdf_path):
     --headless=new first and falls back to legacy --headless. Returns True on success."""
     html_abs = os.path.abspath(html_path)
     pdf_abs = os.path.abspath(pdf_path)
-    file_url = "file://" + html_abs
+    # Percent-encode the path so '#'/'%' (and spaces) in folder names survive as a file:// URL.
+    file_url = "file://" + quote(html_abs)
     base = [
         "--disable-gpu",
         "--no-pdf-header-footer",

@@ -3,7 +3,6 @@ config/config.json
 config/companies.txt
 config/terms.md
 config/profile.md
-config/accomplishment-bank.md
 
 # Generated artifacts + state
 state/
@@ -16,6 +15,7 @@ applications/
 # Secrets / auth
 *.tokens.json
 *oauth*.json
+*google_token*.json
 .env
 
 # OS / editor

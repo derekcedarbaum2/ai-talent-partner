@@ -22,8 +22,10 @@ Head of Product
 # Product Marketing Manager
 # Associate Product Manager
 
-## Hard filters (enforced in scripts/poll.py and the generation prompts)
-# Uncomment / edit the ones you want. Leave commented to disable.
+## Hard filters (documentation only)
+# Nothing in this section is parsed or enforced. The enforced thresholds live in
+# config.json's `filters` block. Keep this section in sync with config.json so the
+# finder prompt and the scripts apply the same rules.
 # - International location with no US option -> excluded
 # - Requires 10+ years of experience in <your field> -> excluded
 # - Salary stated AND top of range < 150000 -> excluded (no salary stated -> kept)

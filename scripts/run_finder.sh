@@ -9,13 +9,19 @@
 #
 # The model step runs through config "agent_command" (default "claude -p"). For Codex or another
 # CLI, set agent_command to your headless invocation; the prompt is piped on stdin. If no headless
-# agent is available, phase B is skipped and the prompt is printed for you to run. See AGENTS.md.
+# agent is found, the run aborts loudly with a non-zero exit so the scheduler surfaces it. See AGENTS.md.
+
+# NOTE: this script requires bash (run it via /bin/bash or the shebang, not zsh/sh):
+# the portable agent path relies on bash word-splitting of the multi-word $AGENT_CMD.
 
 set -uo pipefail
 SCRIPTS="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$(dirname "$SCRIPTS")"
 PY="${PYTHON:-python3}"
 LOG="$ROOT/runs.log"
+# Keep a handle on the real stderr so fatal errors reach launchd/cron logs,
+# not just runs.log (the main block below redirects 1+2 into runs.log).
+exec 3>&2
 
 read_cfg() { "$PY" - "$1" <<'PYEOF'
 import json, os, sys
@@ -36,8 +42,15 @@ PROMPT_FILE="$ROOT/prompts/finder.md"
   echo ""
   echo "===== $(date '+%Y-%m-%d %H:%M:%S %Z') FINDER START ====="
 
-  # Phase A: deterministic poll.
+  # Phase A: deterministic poll. Gate everything on it: judging stale state and then
+  # letting check_live.py --apply prune rows is worse than skipping the run.
   "$PY" "$SCRIPTS/poll.py"
+  RC=$?
+  if [ "$RC" -ne 0 ]; then
+    echo "ERROR: poll.py exited $RC; aborting before the model step and post-passes."
+    echo "ERROR: finder aborted: poll.py exited $RC. See $LOG." >&3
+    exit "$RC"
+  fi
 
   # Phase B: model judgment + web shard + append.
   cd "$ROOT"
@@ -48,11 +61,17 @@ PROMPT_FILE="$ROOT/prompts/finder.md"
       --allowedTools "Read Write Edit WebFetch WebSearch Glob Grep Bash(date:*) Bash(python3:*)" \
       --disallowedTools "Bash(rm:*) Bash(git:*)" </dev/null
   elif [ -f "$PROMPT_FILE" ] && [ "$AGENT_BIN" != "claude" ] && command -v "$AGENT_BIN" >/dev/null 2>&1; then
+    # Portable path: pipe the prompt on stdin. $AGENT_CMD is intentionally unquoted so
+    # bash word-splits a multi-word command like "codex exec" (hence the bash requirement).
     cat "$PROMPT_FILE" | $AGENT_CMD
   else
-    echo "No headless agent available (agent_command=$AGENT_CMD): skipping the model step."
-    echo "Run prompts/finder.md yourself against state/candidates.json + state/web_shard.json,"
-    echo "then append results through scripts/sheet_io.py. See AGENTS.md."
+    echo "ERROR: no headless agent available (agent_command=$AGENT_CMD, prompt=$PROMPT_FILE)."
+    echo "ERROR: '$AGENT_BIN' was not found on PATH=$PATH"
+    echo "Fix PATH (launchd: EnvironmentVariables in the plist) or set agent_command in config/config.json."
+    echo "To run manually: feed prompts/finder.md to your agent against state/candidates.json +"
+    echo "state/web_shard.json, then append results through scripts/sheet_io.py. See AGENTS.md."
+    echo "ERROR: finder aborted: agent '$AGENT_BIN' not found on PATH=$PATH. See $LOG." >&3
+    exit 1
   fi
 
   # Post-passes: drop dead rows, backfill dates, sort newest-first.
@@ -63,4 +82,5 @@ PROMPT_FILE="$ROOT/prompts/finder.md"
   echo "===== $(date '+%Y-%m-%d %H:%M:%S %Z') FINDER END ====="
 } >> "$LOG" 2>&1
 
-tail -n 3000 "$LOG" > "$LOG.tmp" 2>/dev/null && mv "$LOG.tmp" "$LOG"
+# Truncate the shared log via a per-process temp name so overlapping runs don't race.
+tail -n 3000 "$LOG" > "$LOG.tmp.$$" 2>/dev/null && mv -f "$LOG.tmp.$$" "$LOG"

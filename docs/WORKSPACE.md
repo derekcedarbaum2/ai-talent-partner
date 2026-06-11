@@ -23,6 +23,10 @@ The setup skill asks where you want the workspace and creates this structure:
       resume.md                  tailored resume draft
       cover-letter.md            tailored cover letter draft
       application-questions.md   answers to the posting's substantive questions
+      resume.html                styled resume, rendered from the template
+      cover-letter.html          styled cover letter, rendered from the template
+      resume.pdf                 PDF, rendered by the scheduler when Chrome is available
+      cover-letter.pdf           PDF, same deal
 ```
 
 The config keys `workspace_root`, `accomplishment_bank`, `profile_file`, `applications_dir`, and

@@ -3,8 +3,10 @@
   macOS launchd job for the GENERATOR (runs a few times a day).
   It builds resume + cover letter + answers for every job you marked "Yes" that has no materials yet.
   1. Replace REPO_PATH with the absolute path to your clone.
-  2. Save as ~/Library/LaunchAgents/com.user.ai-talent-partner-apply.plist (drop the .example).
-  3. Load it: launchctl load ~/Library/LaunchAgents/com.user.ai-talent-partner-apply.plist
+  2. In EnvironmentVariables below, replace /Users/YOURUSER with your home directory
+     (launchd does NOT expand $HOME or ~ here; the path must be absolute).
+  3. Save as ~/Library/LaunchAgents/com.user.ai-talent-partner-apply.plist (drop the .example).
+  4. Load it: launchctl load ~/Library/LaunchAgents/com.user.ai-talent-partner-apply.plist
 -->
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -13,9 +15,16 @@
     <string>com.user.ai-talent-partner-apply</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/bin/zsh</string>
+        <string>/bin/bash</string>
         <string>REPO_PATH/scripts/run_apply.sh</string>
     </array>
+    <!-- launchd's default PATH is /usr/bin:/bin and can't find `claude` (or another agent
+         CLI), so the model step would silently no-op. Edit /Users/YOURUSER to your home dir. -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/opt/homebrew/bin:/Users/YOURUSER/.local/bin:/usr/bin:/bin</string>
+    </dict>
     <key>StartCalendarInterval</key>
     <array>
         <dict><key>Hour</key><integer>9</integer><key>Minute</key><integer>7</integer></dict>

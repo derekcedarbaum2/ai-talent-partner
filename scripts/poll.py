@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Phase A (deterministic, no LLM): poll resolved ATS boards, extract postings, prefilter titles
-against config/terms.md, apply the config-driven hard filters, write state/candidates.json.
-The model step (prompts/finder.md) does the final judgment, the web-search shard for non-ATS
-companies, de-dup against the sheet, and the append.
+against config/terms.md, apply the config-driven hard filters, de-dup ATS candidates against
+the tracker, write state/candidates.json. The model step (prompts/finder.md) does the final
+judgment, the web-search shard for non-ATS companies, and the append.
 
 Nothing here is hardcoded: companies come from config/companies.txt (via companies_lib), title
 matching from config/terms.md (via terms_lib), and the hard filters from config.json's "filters"
@@ -16,6 +16,7 @@ from datetime import datetime, timezone
 
 import config_lib as C
 import companies_lib
+import sheet_io
 import terms_lib
 import filters
 
@@ -116,8 +117,17 @@ def main():
         if r["url"] not in seen:
             seen.add(r["url"])
             uniq.append(r)
-    json.dump(uniq, open(os.path.join(state, "candidates.json"), "w"), indent=2)
-    print(f"polled {len(pollable)} ATS boards -> {len(uniq)} title-matching postings")
+    # Drop candidates already in the tracker, so the model step never re-judges known rows.
+    try:
+        existing = sheet_io.get_existing_urls()
+    except Exception as e:
+        existing = set()
+        print(f"warning: could not read tracker for de-dup ({e}); keeping all candidates")
+    fresh = [r for r in uniq if r["url"] not in existing]
+    dropped = len(uniq) - len(fresh)
+    json.dump(fresh, open(os.path.join(state, "candidates.json"), "w"), indent=2)
+    print(f"polled {len(pollable)} ATS boards -> {len(fresh)} title-matching postings "
+          f"({dropped} dropped as already-tracked)")
 
     # Web-shard: companies with no pollable ATS get checked 1/SHARDS per run (rotating), so each
     # slice stays small enough for the model step. A full cycle of the non-ATS tail takes SHARDS

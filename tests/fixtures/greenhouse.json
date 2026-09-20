@@ -1,0 +1,37 @@
+{
+  "jobs": [
+    {
+      "title": "Product Manager",
+      "content": "Salary $170,000 - $190,000",
+      "location": {
+        "name": "Remote, US"
+      },
+      "absolute_url": "https://example.com/jobs/1",
+      "updated_at": "2026-01-01"
+    },
+    {
+      "title": "Product Manager",
+      "content": "Salary $90,000 - $110,000",
+      "location": {
+        "name": "Remote, US"
+      },
+      "absolute_url": "https://example.com/jobs/2"
+    },
+    {
+      "title": "Product Manager",
+      "content": "",
+      "location": {
+        "name": "London, UK"
+      },
+      "absolute_url": "https://example.com/jobs/3"
+    },
+    {
+      "title": "Product Marketing Manager",
+      "content": "",
+      "location": {
+        "name": "Remote, US"
+      },
+      "absolute_url": "https://example.com/jobs/4"
+    }
+  ]
+}

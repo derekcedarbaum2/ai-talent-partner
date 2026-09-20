@@ -125,7 +125,8 @@ def main():
         print(f"warning: could not read tracker for de-dup ({e}); keeping all candidates")
     fresh = [r for r in uniq if r["url"] not in existing]
     dropped = len(uniq) - len(fresh)
-    json.dump(fresh, open(os.path.join(state, "candidates.json"), "w"), indent=2)
+    with open(os.path.join(state, "candidates.json"), "w") as f:
+        json.dump(fresh, f, indent=2)
     print(f"polled {len(pollable)} ATS boards -> {len(fresh)} title-matching postings "
           f"({dropped} dropped as already-tracked)")
 
@@ -135,14 +136,17 @@ def main():
     SHARDS = int(C.get(cfg, "web_shard_count", 24)) or 24
     idxf = os.path.join(state, "shard_idx")
     try:
-        idx = int(open(idxf).read().strip())
+        with open(idxf) as f:
+            idx = int(f.read().strip())
     except Exception:
         idx = 0
     non_pollable = [c for c in comps if not (c.get("ats") and c["ats"]["provider"] != "workday")]
     shard = [{"name": c["name"], "url": c["url"], "sector": c.get("sector", "")}
              for c in non_pollable[idx::SHARDS]]
-    json.dump(shard, open(os.path.join(state, "web_shard.json"), "w"), indent=2)
-    open(idxf, "w").write(str((idx + 1) % SHARDS))
+    with open(os.path.join(state, "web_shard.json"), "w") as f:
+        json.dump(shard, f, indent=2)
+    with open(idxf, "w") as f:
+        f.write(str((idx + 1) % SHARDS))
     print(f"web-shard {idx+1}/{SHARDS}: {len(shard)} non-ATS companies to check this run")
 
 

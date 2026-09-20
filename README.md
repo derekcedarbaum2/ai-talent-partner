@@ -10,6 +10,8 @@ your formatting. You stay in control; the agent does the grinding.
 This is a "build your own" repo. Clone it, open it with Claude Code or Codex, and run setup.
 It interviews you, builds your config, and stands up the whole loop.
 
+See a [fictional completed application packet](docs/SAMPLE-APPLICATION.md).
+
 ## Get started
 
 This is a clone-and-customize repo, not an npm package, so there is no `npx ai-talent-partner` one-liner. Clone it and drive it with your coding agent:
@@ -125,3 +127,15 @@ Tuning levers if cost is a concern: raise the finder cron interval, cut the comp
   leave a stale row; the liveness sweep catches everything on the major ATS platforms.
 
 MIT licensed. Fork it, change it, make it yours.
+
+## Support and validation
+
+Python 3.10+ and a coding agent for the writing steps. macOS launchd templates are included; Linux scheduling requires your own cron configuration. PDF output requires Chrome or Chromium.
+
+This is an independently maintained project. Report reproducible bugs through Issues; security reports follow [SECURITY.md](SECURITY.md). The latest release and default branch receive fixes, with no response-time guarantee.
+
+Run the local checks with:
+
+```bash
+python3 -m unittest discover -s tests -v
+```
